@@ -1,0 +1,17 @@
+# Core ML
+scikit-learn
+pandas
+numpy
+
+# XAI
+shap
+
+# Visualization
+matplotlib
+seaborn
+
+# Notebook
+jupyter
+
+# User study logging
+openpyxl
