@@ -1,0 +1,1322 @@
+{
+  "metadata": {
+    "description": "Task cases for MPhil user study evaluation",
+    "model_accuracy": "68.03%",
+    "model_roc_auc": "0.7658",
+    "temporal_cutoff": "Day 42",
+    "calibrated": true,
+    "total_cases": 10
+  },
+  "cases": [
+    {
+      "case_id": "high_risk_1",
+      "risk_category": "High Risk",
+      "features": {
+        "studied_credits": 120.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 69.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 2.0,
+        "completion_rate": 0.5,
+        "total_clicks_pre_cutoff": 92.0,
+        "num_activities_accessed": 14.0,
+        "days_active": 10.0,
+        "avg_clicks_per_active_day": 9.2,
+        "days_since_last_activity": 5.0
+      },
+      "true_label": 0,
+      "predicted_label": 0,
+      "probability": 0.2191759660179342,
+      "shap_values": {
+        "studied_credits": -0.32510091300980903,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -0.10842483893368836,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": 0.04242342063049603,
+        "completion_rate": -0.6179218688414041,
+        "total_clicks_pre_cutoff": -0.17373090599802057,
+        "num_activities_accessed": 0.02176600608421021,
+        "days_active": -0.21630016278425634,
+        "avg_clicks_per_active_day": 0.06576054437543016,
+        "days_since_last_activity": 0.10923191700218175
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "completion_rate": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_activities_accessed": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_active": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "completion_rate",
+          "shap_value": -0.6179218688414041,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "studied_credits",
+          "shap_value": -0.32510091300980903,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_active",
+          "shap_value": -0.21630016278425634,
+          "direction": "decreases likelihood of success (increases risk)"
+        }
+      ],
+      "justification": "Predicted At-Risk (P=21.9%) based on moderate assessment performance (69.0%), low VLE engagement. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "high_risk_2",
+      "risk_category": "High Risk",
+      "features": {
+        "studied_credits": 120.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 1.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 207.0,
+        "num_activities_accessed": 29.0,
+        "days_active": 20.0,
+        "avg_clicks_per_active_day": 10.35,
+        "days_since_last_activity": 2.0
+      },
+      "true_label": 1,
+      "predicted_label": 0,
+      "probability": 0.18438956083507319,
+      "shap_values": {
+        "studied_credits": -0.32510091300980903,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -1.3569194876775037,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": -0.11335768269186391,
+        "num_activities_accessed": 0.0038853254645955185,
+        "days_active": 0.03353528777353776,
+        "avg_clicks_per_active_day": 0.05846231715563799,
+        "days_since_last_activity": 0.26333946717433127
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_activities_accessed": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "avg_assessment_score",
+          "shap_value": -1.3569194876775037,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "studied_credits",
+          "shap_value": -0.32510091300980903,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.26333946717433127,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted At-Risk (P=18.4%) based on weak assessment performance (1.0%), moderate VLE engagement, strong coursework completion. Prediction was incorrect (true outcome: Success). "
+    },
+    {
+      "case_id": "high_risk_3",
+      "risk_category": "High Risk",
+      "features": {
+        "studied_credits": 120.0,
+        "num_of_prev_attempts": 2.0,
+        "avg_assessment_score": 80.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 2.0,
+        "completion_rate": 0.5,
+        "total_clicks_pre_cutoff": 241.0,
+        "num_activities_accessed": 35.0,
+        "days_active": 23.0,
+        "avg_clicks_per_active_day": 10.478260869565217,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 0,
+      "predicted_label": 0,
+      "probability": 0.2667481972161635,
+      "shap_values": {
+        "studied_credits": -0.32510091300980903,
+        "num_of_prev_attempts": -0.5230535866558504,
+        "avg_assessment_score": 0.09353753071604647,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": 0.04242342063049603,
+        "completion_rate": -0.6179218688414041,
+        "total_clicks_pre_cutoff": -0.09550820797526106,
+        "num_activities_accessed": -0.0032669467832503584,
+        "days_active": 0.10848592294087599,
+        "avg_clicks_per_active_day": 0.05764833718216401,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "avg_assessment_score": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "completion_rate": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "completion_rate",
+          "shap_value": -0.6179218688414041,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "num_of_prev_attempts",
+          "shap_value": -0.5230535866558504,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.3660778339557643,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted At-Risk (P=26.7%) based on strong assessment performance (80.0%), moderate VLE engagement. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "medium_risk_4",
+      "risk_category": "Medium Risk",
+      "features": {
+        "studied_credits": 150.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 96.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 400.0,
+        "num_activities_accessed": 43.0,
+        "days_active": 18.0,
+        "avg_clicks_per_active_day": 22.22222222222222,
+        "days_since_last_activity": 11.0
+      },
+      "true_label": 1,
+      "predicted_label": 0,
+      "probability": 0.38037151042397427,
+      "shap_values": {
+        "studied_credits": -0.5674060341617166,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": 0.38730097747929715,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": -0.012035664447618341,
+        "num_activities_accessed": -0.012803309780378195,
+        "days_active": -0.01643180233802107,
+        "avg_clicks_per_active_day": -0.016882183176226064,
+        "days_since_last_activity": -0.1989831833421174
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_since_last_activity": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "studied_credits",
+          "shap_value": -0.5674060341617166,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "avg_assessment_score",
+          "shap_value": 0.38730097747929715,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": -0.1989831833421174,
+          "direction": "decreases likelihood of success (increases risk)"
+        }
+      ],
+      "justification": "Predicted At-Risk (P=38.0%) based on strong assessment performance (96.0%), moderate VLE engagement, strong coursework completion. Prediction was incorrect (true outcome: Success). "
+    },
+    {
+      "case_id": "medium_risk_5",
+      "risk_category": "Medium Risk",
+      "features": {
+        "studied_credits": 120.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 73.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 578.0,
+        "num_activities_accessed": 67.0,
+        "days_active": 23.0,
+        "avg_clicks_per_active_day": 25.130434782608692,
+        "days_since_last_activity": 10.0
+      },
+      "true_label": 1,
+      "predicted_label": 0,
+      "probability": 0.39048291517144684,
+      "shap_values": {
+        "studied_credits": -0.32510091300980903,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -0.03498397724287569,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": 0.08141158553930244,
+        "num_activities_accessed": -0.041412398771761706,
+        "days_active": 0.10848592294087599,
+        "avg_clicks_per_active_day": -0.03533852758418607,
+        "days_since_last_activity": -0.14761399995140087
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_since_last_activity": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "studied_credits",
+          "shap_value": -0.32510091300980903,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": -0.14761399995140087,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_active",
+          "shap_value": 0.10848592294087599,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted At-Risk (P=39.0%) based on strong assessment performance (73.0%), moderate VLE engagement, strong coursework completion. Prediction was incorrect (true outcome: Success). "
+    },
+    {
+      "case_id": "medium_risk_6",
+      "risk_category": "Medium Risk",
+      "features": {
+        "studied_credits": 120.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 85.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 205.0,
+        "num_activities_accessed": 17.0,
+        "days_active": 27.0,
+        "avg_clicks_per_active_day": 7.592592592592593,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 1,
+      "predicted_label": 1,
+      "probability": 0.5899476585648995,
+      "shap_values": {
+        "studied_credits": -0.32510091300980903,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": 0.1853386078295623,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": -0.11440765179284054,
+        "num_activities_accessed": 0.018189869960287274,
+        "days_active": 0.20842010316399365,
+        "avg_clicks_per_active_day": 0.07596160915285302,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_activities_accessed": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.3660778339557643,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "studied_credits",
+          "shap_value": -0.32510091300980903,
+          "direction": "decreases likelihood of success (increases risk)"
+        },
+        {
+          "feature": "days_active",
+          "shap_value": 0.20842010316399365,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted Success (P=59.0%) based on strong assessment performance (85.0%), moderate VLE engagement, strong coursework completion. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "low_risk_7",
+      "risk_category": "Low Risk",
+      "features": {
+        "studied_credits": 30.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 87.0,
+        "num_assessments_completed": 2.0,
+        "num_assessments_due": 2.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 1398.0,
+        "num_activities_accessed": 43.0,
+        "days_active": 35.0,
+        "avg_clicks_per_active_day": 39.94285714285714,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 1,
+      "predicted_label": 1,
+      "probability": 0.8841290030181476,
+      "shap_values": {
+        "studied_credits": 0.4018144504459139,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": 0.22205903867496865,
+        "num_assessments_completed": 0.21595773580790936,
+        "num_assessments_due": 0.04242342063049603,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": 0.511898916939724,
+        "num_activities_accessed": -0.012803309780378195,
+        "days_active": 0.4082884636102289,
+        "avg_clicks_per_active_day": -0.1293423745934238,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_completed": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_due": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "total_clicks_pre_cutoff",
+          "shap_value": 0.511898916939724,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "days_active",
+          "shap_value": 0.4082884636102289,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "studied_credits",
+          "shap_value": 0.4018144504459139,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted Success (P=88.4%) based on strong assessment performance (87.0%), high VLE engagement, strong coursework completion. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "low_risk_8",
+      "risk_category": "Low Risk",
+      "features": {
+        "studied_credits": 60.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 66.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 917.0,
+        "num_activities_accessed": 64.0,
+        "days_active": 45.0,
+        "avg_clicks_per_active_day": 20.377777777777776,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 1,
+      "predicted_label": 1,
+      "probability": 0.7659968372687552,
+      "shap_values": {
+        "studied_credits": 0.15950932929400624,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -0.16350548520179786,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": 0.2593813481548426,
+        "num_activities_accessed": -0.037836262647838764,
+        "days_active": 0.658123914168023,
+        "avg_clicks_per_active_day": -0.005176813915496593,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "days_active",
+          "shap_value": 0.658123914168023,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.3660778339557643,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "total_clicks_pre_cutoff",
+          "shap_value": 0.2593813481548426,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted Success (P=76.6%) based on moderate assessment performance (66.0%), moderate VLE engagement, strong coursework completion. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "low_risk_9",
+      "risk_category": "Low Risk",
+      "features": {
+        "studied_credits": 60.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 66.0,
+        "num_assessments_completed": 1.0,
+        "num_assessments_due": 1.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 1233.0,
+        "num_activities_accessed": 78.0,
+        "days_active": 37.0,
+        "avg_clicks_per_active_day": 33.32432432432432,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 1,
+      "predicted_label": 1,
+      "probability": 0.7413542207241345,
+      "shap_values": {
+        "studied_credits": 0.15950932929400624,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -0.16350548520179786,
+        "num_assessments_completed": -0.04474331532665374,
+        "num_assessments_due": -0.0117384688822863,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": 0.4252764661091514,
+        "num_activities_accessed": -0.05452489789281248,
+        "days_active": 0.4582555537217878,
+        "avg_clicks_per_active_day": -0.0873392820966377,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_due": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "days_active",
+          "shap_value": 0.4582555537217878,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "total_clicks_pre_cutoff",
+          "shap_value": 0.4252764661091514,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.3660778339557643,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted Success (P=74.1%) based on moderate assessment performance (66.0%), high VLE engagement, strong coursework completion. Prediction matches actual outcome."
+    },
+    {
+      "case_id": "surprising_10",
+      "risk_category": "Surprising (False Negative)",
+      "features": {
+        "studied_credits": 60.0,
+        "num_of_prev_attempts": 0.0,
+        "avg_assessment_score": 65.0,
+        "num_assessments_completed": 2.0,
+        "num_assessments_due": 2.0,
+        "completion_rate": 1.0,
+        "total_clicks_pre_cutoff": 1014.0,
+        "num_activities_accessed": 81.0,
+        "days_active": 54.0,
+        "avg_clicks_per_active_day": 18.77777777777778,
+        "days_since_last_activity": 0.0
+      },
+      "true_label": 0,
+      "predicted_label": 1,
+      "probability": 0.8517017332589568,
+      "shap_values": {
+        "studied_credits": 0.15950932929400624,
+        "num_of_prev_attempts": 0.0463274474100986,
+        "avg_assessment_score": -0.18186570062450103,
+        "num_assessments_completed": 0.21595773580790936,
+        "num_assessments_due": 0.04242342063049603,
+        "completion_rate": 0.029186124096613898,
+        "total_clicks_pre_cutoff": 0.31030484955220955,
+        "num_activities_accessed": -0.058101034016735414,
+        "days_active": 0.8829758196700377,
+        "avg_clicks_per_active_day": 0.004977241346822929,
+        "days_since_last_activity": 0.3660778339557643
+      },
+      "shap_directions": {
+        "studied_credits": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_of_prev_attempts": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_assessment_score": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "num_assessments_completed": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_assessments_due": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "completion_rate": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "total_clicks_pre_cutoff": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "num_activities_accessed": {
+          "direction": "decreases",
+          "effect": "risk",
+          "plain_text": "decreases likelihood of success (increases risk)",
+          "bar_direction": "negative",
+          "color": "#EF4444"
+        },
+        "days_active": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "avg_clicks_per_active_day": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        },
+        "days_since_last_activity": {
+          "direction": "increases",
+          "effect": "success",
+          "plain_text": "increases likelihood of success",
+          "bar_direction": "positive",
+          "color": "#10B981"
+        }
+      },
+      "expected_value": -0.06976224147702427,
+      "top_3_features": [
+        {
+          "feature": "days_active",
+          "shap_value": 0.8829758196700377,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "days_since_last_activity",
+          "shap_value": 0.3660778339557643,
+          "direction": "increases likelihood of success"
+        },
+        {
+          "feature": "total_clicks_pre_cutoff",
+          "shap_value": 0.31030484955220955,
+          "direction": "increases likelihood of success"
+        }
+      ],
+      "justification": "Predicted Success (P=85.2%) based on moderate assessment performance (65.0%), high VLE engagement, strong coursework completion. This is a surprising case where high confidence prediction was incorrect, useful for testing whether users notice contradictory patterns."
+    }
+  ]
+}

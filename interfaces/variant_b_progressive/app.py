@@ -193,7 +193,7 @@ with right_col:
         is_at_risk   = result["prediction"] == 0
 
         box_class    = "at-risk" if is_at_risk else "success"
-        emoji        = "⚠️" if is_at_risk else "✅"
+        emoji        = "⚠" if is_at_risk else "☑️"
         color        = "#C53030" if is_at_risk else "#276749"
         prob_display = (1 - prob) if is_at_risk else prob
 

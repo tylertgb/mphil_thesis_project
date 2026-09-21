@@ -1,0 +1,9 @@
+CALIBRATION REPORT
+============================================================
+
+Brier Score (Uncalibrated): 0.1984
+Brier Score (Calibrated):   0.1975
+Improvement:                0.0009
+
+Interface displays CALIBRATED probabilities from calibrated_model.pkl
+to ensure trustworthy confidence estimates for participants.

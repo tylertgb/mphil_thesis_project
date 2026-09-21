@@ -1,0 +1,89 @@
+﻿[1/7] Loading data …
+  Dataset loaded   : 32,593 rows, 11 features
+  Class balance    : At-Risk=17,208  Success=15,385
+  [impute] NaN columns resolved : ['avg_assessment_score', 'num_assessments_completed', 'num_assessments_due', 'completion_rate', 'total_clicks_pre_cutoff', 'num_activities_accessed', 'days_active', 'avg_clicks_per_active_day', 'days_since_last_activity']
+
+[2/7] Splitting and scaling …
+  Train : 26,074 rows | Test : 6,519 rows
+
+[3/7] Training logistic regression …
+  Training complete.
+
+[4/7] Evaluating …
+
+------------------------------------------------------
+  MODEL EVALUATION
+------------------------------------------------------
+  Test accuracy   : 0.6803
+  ROC-AUC         : 0.7658
+
+  Classification Report:
+              precision    recall  f1-score   support
+
+ At-Risk (0)       0.73      0.64      0.68      3442
+ Success (1)       0.64      0.73      0.68      3077
+
+    accuracy                           0.68      6519
+   macro avg       0.68      0.68      0.68      6519
+weighted avg       0.69      0.68      0.68      6519
+
+  Confusion Matrix (rows=actual, cols=predicted):
+    TN= 2186  FP= 1256
+    FN=  828  TP= 2249
+
+  5-Fold CV ROC-AUC : 0.7571 ± 0.0053
+------------------------------------------------------
+
+[5/7] Calibration analysis …
+
+  Calibration Analysis:
+    Brier Score (uncalibrated) : 0.1984
+    Uncalibrated diagram saved → results/calibration_reliability_diagram_uncalibrated.png
+    Brier Score (calibrated)   : 0.1975
+    Calibrated diagram saved   → results/calibration_reliability_diagram_calibrated.png
+
+[6/7] Computing SHAP values …
+
+  [SHAP] Using 2D array (assumed class 1)
+  [SHAP] Expected value (base rate): -0.1981
+  [SHAP] Values shape: (6519, 11)
+
+  SHAP Additivity Verification (first 5 test samples):
+    Sample 0: SHAP sum= -1.173, Model= -1.173, Diff=0.0000 ✓ PASS
+    Sample 1: SHAP sum= -0.248, Model= -0.248, Diff=0.0000 ✓ PASS
+    Sample 2: SHAP sum= -1.131, Model= -1.131, Diff=0.0000 ✓ PASS
+    Sample 3: SHAP sum= -1.500, Model= -1.500, Diff=0.0000 ✓ PASS
+    Sample 4: SHAP sum=  0.107, Model=  0.107, Diff=0.0000 ✓ PASS
+
+  SHAP Summary (mean |SHAP| per feature — all 11):
+     1. days_since_last_activity                 0.4216
+     2. studied_credits                          0.2632
+     3. days_active                              0.2431
+     4. avg_assessment_score                     0.2133
+     5. total_clicks_pre_cutoff                  0.1608
+     6. num_of_prev_attempts                     0.0723
+     7. num_assessments_completed                0.0717
+     8. completion_rate                          0.0660
+     9. avg_clicks_per_active_day                0.0529
+    10. num_activities_accessed                  0.0201
+    11. num_assessments_due                      0.0185
+
+[7/7] Saving artefacts …
+  Artefacts saved to models\saved_models/
+    .gitkeep
+    calibrated_model.pkl
+    feature_names.json
+    logistic_regression.pkl
+    scaler.pkl
+    shap_expected_value.npy
+    shap_values.npy
+
+  Calibration report → results/calibration_report.txt
+
+  Pipeline complete.
+
+  CRITICAL NOTES FOR THESIS:
+    1. Temporal cutoff enforced at day 42 - no leakage
+    2. SHAP values verified for additivity
+    3. Model calibrated - interfaces use calibrated_model.pkl
+    4. All artefacts saved with fixed random seed (42) for reproducibility

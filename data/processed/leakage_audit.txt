@@ -1,0 +1,53 @@
+================================================================================
+TEMPORAL LEAKAGE AUDIT
+Generated: 2026-09-20 07:01:30
+Prediction Cutoff: Day 42
+================================================================================
+
+Feature: total_clicks_pre_cutoff
+  Temporal Window: VLE clicks with date <= 42
+  Justification: Only clicks recorded up to day 42 are summed. Future clicks excluded.
+
+Feature: num_activities_accessed
+  Temporal Window: Distinct VLE sites visited with date <= 42
+  Justification: Breadth of engagement measured only from pre-cutoff interactions.
+
+Feature: days_active
+  Temporal Window: Distinct days with VLE activity, date <= 42
+  Justification: Consistency of engagement before cutoff.
+
+Feature: avg_clicks_per_active_day
+  Temporal Window: Derived from total_clicks_pre_cutoff / days_active
+  Justification: Intensity of engagement per active day, using only pre-cutoff data.
+
+Feature: days_since_last_activity
+  Temporal Window: 42 - max(date where date <= 42)
+  Justification: Recency of engagement relative to cutoff, not to module end.
+
+Feature: avg_assessment_score
+  Temporal Window: Mean score on assessments with due date <= 42
+  Justification: Only assessments due by day 42 are included. Final exams and late TMAs excluded.
+
+Feature: num_assessments_completed
+  Temporal Window: Count of submitted assessments with due date <= 42
+  Justification: Measures early engagement with coursework. Late submissions excluded.
+
+Feature: num_assessments_due
+  Temporal Window: Count of assessments with due date <= 42
+  Justification: Denominator for completion rate. Known at cutoff time.
+
+Feature: completion_rate
+  Temporal Window: num_assessments_completed / num_assessments_due
+  Justification: Proportion of early assessments submitted. Derived from pre-cutoff data only.
+
+Feature: studied_credits
+  Temporal Window: Available at student enrollment
+  Justification: Background/demographic feature known before module starts.
+
+Feature: num_of_prev_attempts
+  Temporal Window: Available at student enrollment
+  Justification: Background/demographic feature known before module starts.
+
+Feature: target (final_result)
+  Temporal Window: End-of-module outcome (label only, not a feature)
+  Justification: This is what we're predicting. Not used in any feature computation.

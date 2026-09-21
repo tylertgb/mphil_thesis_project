@@ -1,17 +1,25 @@
-# Core ML
-scikit-learn
-pandas
-numpy
+# MPhil Thesis Project - Essential Dependencies
+# A Human-Centered Evaluation of SHAP-Based Explainable Interfaces
+# Python 3.12.1 required
 
-# XAI
-shap
+# Core Data Science
+numpy>=2.2.0
+pandas>=2.2.0
+scipy>=1.18.0
+
+# Machine Learning
+scikit-learn>=1.9.0
+joblib>=1.6.0
+
+# Explainability
+shap>=0.52.0
 
 # Visualization
-matplotlib
-seaborn
+matplotlib>=3.10.0
+seaborn>=0.13.0
 
-# Notebook
-jupyter
+# Interface (Streamlit)
+streamlit>=1.40.0
 
-# User study logging
-openpyxl
+# Development & Testing
+pytest>=8.0.0
