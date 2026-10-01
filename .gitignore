@@ -35,3 +35,8 @@ Thumbs.db
 
 # Environment variables
 .env
+
+# Google Sheets credentials (NEVER commit these!)
+service_account.json
+google_sheets_config.json
+*.json.bak
