@@ -342,6 +342,7 @@ elif not st.session_state.variant_completed:
             save_session_to_file()
             
             st.success("✅ All responses saved for Variant A!")
+            st.info("💾 Your responses have been recorded. Participant ID: **" + st.session_state.participant_id + "**")
             st.rerun()
         st.stop()
 
