@@ -15,9 +15,9 @@ build/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Saved models (large binary files)
-models/saved_models/*.pkl
-models/saved_models/*.joblib
+# Saved models (needed for deployment - keep them in git)
+# models/saved_models/*.pkl
+# models/saved_models/*.joblib
 
 # Data (raw OULAD files can be large)
 data/raw/
