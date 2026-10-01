@@ -20,6 +20,8 @@ Output: CSV files compatible with statistical analysis (paired t-tests, etc.)
 
 import csv
 import json
+import fcntl
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -28,6 +30,8 @@ from typing import Dict, List, Optional
 class StudyResponseLogger:
     """
     Logs participant responses throughout the study.
+    
+    Thread-safe for concurrent users via file locking.
     
     Within-subjects design:
     - Each participant uses BOTH interfaces (A and B)
@@ -49,6 +53,47 @@ class StudyResponseLogger:
         self.metadata_file = self.output_dir / "session_metadata.json"
         
         self._initialize_files()
+    
+    def _write_with_lock(self, filepath: Path, row: List, mode='a'):
+        """
+        Thread-safe CSV write with file locking for concurrent users.
+        
+        Args:
+            filepath: Path to CSV file
+            row: List of values to write
+            mode: File open mode ('a' for append, 'w' for write)
+        """
+        max_retries = 5
+        retry_delay = 0.1
+        
+        for attempt in range(max_retries):
+            try:
+                with open(filepath, mode, newline='', encoding='utf-8') as f:
+                    # Acquire exclusive lock (Unix/Linux)
+                    try:
+                        fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    except (IOError, AttributeError):
+                        # fcntl not available on Windows, fall back to retry logic
+                        if attempt < max_retries - 1:
+                            time.sleep(retry_delay)
+                            continue
+                    
+                    writer = csv.writer(f)
+                    writer.writerow(row)
+                    
+                    # Release lock (automatic on file close, but explicit is better)
+                    try:
+                        fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    except (IOError, AttributeError):
+                        pass
+                
+                return  # Success
+                
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                else:
+                    raise Exception(f"Failed to write to {filepath} after {max_retries} attempts: {e}")
     
     def _initialize_files(self):
         """Create CSV files with headers if they don't exist."""
@@ -153,18 +198,17 @@ class StudyResponseLogger:
     
     def log_demographics(self, participant_id: str, demographics: Dict):
         """Log participant demographics at study start."""
-        with open(self.demographics_file, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                demographics.get('age_group'),
-                demographics.get('gender'),
-                demographics.get('education_level'),
-                demographics.get('role'),
-                demographics.get('years_experience'),
-                demographics.get('familiarity_with_analytics'),
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            demographics.get('age_group'),
+            demographics.get('gender'),
+            demographics.get('education_level'),
+            demographics.get('role'),
+            demographics.get('years_experience'),
+            demographics.get('familiarity_with_analytics'),
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.demographics_file, row)
     
     def log_sus(self, participant_id: str, condition: str, responses: List[int]):
         """
@@ -179,9 +223,6 @@ class StudyResponseLogger:
         assert condition in ["variant_a", "variant_b"], f"Invalid condition: {condition}"
         
         # Compute SUS score (0-100)
-        # Odd items: contribution = (response - 1)
-        # Even items: contribution = (5 - response)
-        # Score = sum(contributions) * 2.5
         score = 0
         for i, resp in enumerate(responses, 1):
             if i % 2 == 1:  # Odd items
@@ -190,15 +231,14 @@ class StudyResponseLogger:
                 score += (5 - resp)
         sus_score = score * 2.5
         
-        with open(self.sus_file, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                condition,
-                *responses,
-                sus_score,
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            condition,
+            *responses,
+            sus_score,
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.sus_file, row)
     
     def log_trust(self, participant_id: str, condition: str, responses: List[int]):
         """Log trust scale responses for a condition."""
@@ -206,26 +246,20 @@ class StudyResponseLogger:
         
         trust_mean = sum(responses) / len(responses)
         
-        with open(self.trust_file, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                condition,
-                *responses,
-                trust_mean,
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            condition,
+            *responses,
+            trust_mean,
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.trust_file, row)
     
     def log_understanding(self, participant_id: str, condition: str, responses: List[int]):
         """
         Log perceived understanding responses for a condition.
         
         Section D: Perceived Understanding (5 items, 1-5 Likert scale)
-        1. I understand how the system arrived at its prediction.
-        2. The explanation provided by the system is clear and understandable.
-        3. The explanation helped me interpret the prediction effectively.
-        4. I can identify which factors influenced the prediction.
-        5. The explanation improved my overall understanding of the system's output.
         """
         assert condition in ["variant_a", "variant_b"], f"Invalid condition: {condition}"
         assert len(responses) == 5, f"Expected 5 responses, got {len(responses)}"
@@ -233,15 +267,14 @@ class StudyResponseLogger:
         
         understanding_mean = sum(responses) / len(responses)
         
-        with open(self.understanding_file, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                condition,
-                *responses,
-                understanding_mean,
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            condition,
+            *responses,
+            understanding_mean,
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.understanding_file, row)
     
     def log_decision_confidence(
         self,
@@ -254,10 +287,6 @@ class StudyResponseLogger:
         Log decision confidence for a specific task case.
         
         Section E: Decision Confidence (4 items, 1-5 Likert scale)
-        1. I feel confident in the decision I made using the system.
-        2. The system helped me make a more informed decision.
-        3. I would be comfortable making similar decisions using this system in the future.
-        4. The explanation increased my confidence in my decision.
         """
         assert condition in ["variant_a", "variant_b"], f"Invalid condition: {condition}"
         assert len(responses) == 4, f"Expected 4 responses, got {len(responses)}"
@@ -265,16 +294,15 @@ class StudyResponseLogger:
         
         confidence_mean = sum(responses) / len(responses)
         
-        with open(self.confidence_file, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                condition,
-                task_case_id,
-                *responses,
-                confidence_mean,
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            condition,
+            task_case_id,
+            *responses,
+            confidence_mean,
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.confidence_file, row)
     
     def log_qualitative_feedback(
         self,
@@ -289,26 +317,17 @@ class StudyResponseLogger:
         Log qualitative feedback responses (Section F: Additional Feedback).
         
         These are asked ONCE at the end of the session, after both conditions.
-        
-        Args:
-            participant_id: Unique participant identifier
-            q1_most_useful: What did you find most useful about the system?
-            q2_challenges: What challenges did you experience while using the system?
-            q3_improvements: How can the explanation interface be improved?
-            q4_preference: Which interface did you prefer (Static / Progressive)?
-            q4_preference_reason: Why did you prefer that interface?
         """
-        with open(self.qualitative_file, 'a', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                participant_id,
-                q1_most_useful,
-                q2_challenges,
-                q3_improvements,
-                q4_preference,
-                q4_preference_reason,
-                datetime.now().isoformat(),
-            ])
+        row = [
+            participant_id,
+            q1_most_useful,
+            q2_challenges,
+            q3_improvements,
+            q4_preference,
+            q4_preference_reason,
+            datetime.now().isoformat(),
+        ]
+        self._write_with_lock(self.qualitative_file, row)
     
     def log_session_metadata(
         self,
