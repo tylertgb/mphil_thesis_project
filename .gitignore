@@ -22,6 +22,9 @@ models/saved_models/*.joblib
 # Data (raw OULAD files can be large)
 data/raw/
 
+# Study session tracking
+study_data/.active_session.json
+
 # IDE
 .vscode/
 .idea/

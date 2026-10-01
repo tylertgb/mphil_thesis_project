@@ -84,6 +84,12 @@ streamlit run interfaces/variant_b_progressive/app.py
 
 ---
 
+## 📚 Documentation
+
+- **[STUDY_INSTRUCTIONS.md](STUDY_INSTRUCTIONS.md)** - Complete guide for running the user study with digital questionnaires
+- **[RUN_INTERFACES.md](RUN_INTERFACES.md)** - How to run the prediction interfaces
+- **[THESIS_NOTES.md](THESIS_NOTES.md)** - Notes for thesis writing (Chapter 3 content)
+
 ## Project Structure
 
 ```

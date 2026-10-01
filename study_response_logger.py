@@ -105,21 +105,23 @@ class StudyResponseLogger:
                     'timestamp',
                 ])
         
-        # Perceived Understanding (3-5 items, 1-5 Likert)
+        # Perceived Understanding (Section D: 5 items, 1-5 Likert)
         if not self.understanding_file.exists():
             with open(self.understanding_file, 'w', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([
                     'participant_id',
                     'condition',
-                    'understanding_1',  # I understand why the system made this prediction
-                    'understanding_2',  # I could explain this prediction to someone else
-                    'understanding_3',  # The explanation was clear and understandable
+                    'understanding_1',  # I understand how the system arrived at its prediction.
+                    'understanding_2',  # The explanation provided by the system is clear and understandable.
+                    'understanding_3',  # The explanation helped me interpret the prediction effectively.
+                    'understanding_4',  # I can identify which factors influenced the prediction.
+                    'understanding_5',  # The explanation improved my overall understanding of the system's output.
                     'understanding_mean',
                     'timestamp',
                 ])
         
-        # Decision Confidence (per task case)
+        # Decision Confidence (Section E: 4 items per task case, 1-5 Likert)
         if not self.confidence_file.exists():
             with open(self.confidence_file, 'w', newline='') as f:
                 writer = csv.writer(f)
@@ -127,8 +129,11 @@ class StudyResponseLogger:
                     'participant_id',
                     'condition',
                     'task_case_id',
-                    'confidence',  # 1-5 scale: How confident are you in this prediction?
-                    'agreement',   # 1-5 scale: How much do you agree with this prediction?
+                    'confidence_1',  # I feel confident in the decision I made using the system.
+                    'confidence_2',  # The system helped me make a more informed decision.
+                    'confidence_3',  # I would be comfortable making similar decisions using this system in the future.
+                    'confidence_4',  # The explanation increased my confidence in my decision.
+                    'confidence_mean',
                     'timestamp',
                 ])
         
@@ -212,8 +217,19 @@ class StudyResponseLogger:
             ])
     
     def log_understanding(self, participant_id: str, condition: str, responses: List[int]):
-        """Log perceived understanding responses for a condition."""
+        """
+        Log perceived understanding responses for a condition.
+        
+        Section D: Perceived Understanding (5 items, 1-5 Likert scale)
+        1. I understand how the system arrived at its prediction.
+        2. The explanation provided by the system is clear and understandable.
+        3. The explanation helped me interpret the prediction effectively.
+        4. I can identify which factors influenced the prediction.
+        5. The explanation improved my overall understanding of the system's output.
+        """
         assert condition in ["variant_a", "variant_b"], f"Invalid condition: {condition}"
+        assert len(responses) == 5, f"Expected 5 responses, got {len(responses)}"
+        assert all(1 <= r <= 5 for r in responses), "All responses must be 1-5"
         
         understanding_mean = sum(responses) / len(responses)
         
@@ -232,11 +248,22 @@ class StudyResponseLogger:
         participant_id: str,
         condition: str,
         task_case_id: str,
-        confidence: int,
-        agreement: int,
+        responses: List[int],
     ):
-        """Log decision confidence for a specific task case."""
+        """
+        Log decision confidence for a specific task case.
+        
+        Section E: Decision Confidence (4 items, 1-5 Likert scale)
+        1. I feel confident in the decision I made using the system.
+        2. The system helped me make a more informed decision.
+        3. I would be comfortable making similar decisions using this system in the future.
+        4. The explanation increased my confidence in my decision.
+        """
         assert condition in ["variant_a", "variant_b"], f"Invalid condition: {condition}"
+        assert len(responses) == 4, f"Expected 4 responses, got {len(responses)}"
+        assert all(1 <= r <= 5 for r in responses), "All responses must be 1-5"
+        
+        confidence_mean = sum(responses) / len(responses)
         
         with open(self.confidence_file, 'a', newline='') as f:
             writer = csv.writer(f)
@@ -244,8 +271,8 @@ class StudyResponseLogger:
                 participant_id,
                 condition,
                 task_case_id,
-                confidence,
-                agreement,
+                *responses,
+                confidence_mean,
                 datetime.now().isoformat(),
             ])
     
@@ -343,18 +370,18 @@ def example_usage():
     trust_responses = [4, 5, 4, 5, 4]  # 5 items
     logger.log_trust(participant_id, "variant_a", trust_responses)
     
-    # Collect understanding
-    understanding_responses = [5, 4, 5]  # 3 items
+    # Collect understanding (5 items)
+    understanding_responses = [5, 4, 5, 4, 5]  # Section D: 5 items
     logger.log_understanding(participant_id, "variant_a", understanding_responses)
     
-    # Log decision confidence for each task case
+    # Log decision confidence for each task case (4 items per case)
     for task_id in ["high_risk_1", "medium_risk_4", "low_risk_7"]:
+        confidence_responses = [4, 4, 3, 4]  # Section E: 4 items
         logger.log_decision_confidence(
             participant_id,
             "variant_a",
             task_id,
-            confidence=4,  # 1-5
-            agreement=4,   # 1-5
+            confidence_responses,
         )
     
     # 3. Participant uses Variant B
@@ -365,16 +392,16 @@ def example_usage():
     trust_responses_b = [5, 5, 5, 5, 5]
     logger.log_trust(participant_id, "variant_b", trust_responses_b)
     
-    understanding_responses_b = [5, 5, 5]
+    understanding_responses_b = [5, 5, 5, 4, 5]  # 5 items
     logger.log_understanding(participant_id, "variant_b", understanding_responses_b)
     
     for task_id in ["high_risk_1", "medium_risk_4", "low_risk_7"]:
+        confidence_responses_b = [5, 5, 4, 5]  # 4 items
         logger.log_decision_confidence(
             participant_id,
             "variant_b",
             task_id,
-            confidence=5,
-            agreement=5,
+            confidence_responses_b,
         )
     
     # 4. Log session metadata at end
