@@ -1,2 +1,3 @@
 participant_id,condition,understanding_1,understanding_2,understanding_3,understanding_4,understanding_5,understanding_mean,timestamp
 P004,variant_a,5,4,4,4,4,4.2,2026-10-02T10:19:58.919985
+P004,variant_b,5,3,4,4,4,4.0,2026-10-02T10:24:13.023148
