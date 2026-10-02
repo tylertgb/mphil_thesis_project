@@ -27,37 +27,13 @@ SESSIONS_FILE = Path("study_data/active_sessions.csv")
 
 def get_next_participant_id(study_data_dir: str = "study_data") -> str:
     """
-    Generate next sequential participant ID (P001, P002, ...).
+    Generate unique participant ID using timestamp.
     
-    Reads existing demographics.csv to find the highest ID and increments.
-    Thread-safe for in-person studies (one session at a time).
+    Format: P_YYYYMMDD_HHMMSS (e.g., P_20241002_143052)
+    This ensures true uniqueness even with concurrent users.
     """
-    study_path = Path(study_data_dir)
-    demographics_file = study_path / "demographics.csv"
-    
-    if not demographics_file.exists():
-        return "P001"
-    
-    # Read existing IDs
-    with open(demographics_file, 'r') as f:
-        lines = f.readlines()
-        if len(lines) <= 1:  # Only header or empty
-            return "P001"
-        
-        # Extract last participant ID
-        last_line = lines[-1].strip()
-        if not last_line:
-            return "P001"
-        
-        # Get first column (participant_id)
-        last_id = last_line.split(',')[0]
-        
-        # Extract number and increment
-        try:
-            num = int(last_id[1:])  # Remove 'P' prefix
-            return f"P{num + 1:03d}"
-        except (ValueError, IndexError):
-            return "P001"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return f"P_{timestamp}"
 
 
 def initialize_session():
