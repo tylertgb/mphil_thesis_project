@@ -33,7 +33,7 @@ from interfaces.shared_components.questionnaire_forms import (
     render_sus_form, render_trust_form,
     render_understanding_form, render_decision_confidence_form
 )
-from study_response_logger import StudyResponseLogger
+from utils.dual_logger import DualLogger
 
 
 # ── Natural-language explanation generator (same as original) ──────────────────
@@ -168,7 +168,7 @@ def get_artefacts():
 model, scaler, feature_names = get_artefacts()
 
 # ── Initialize logger ──────────────────────────────────────────────────────────
-logger = StudyResponseLogger(output_dir="study_data")
+logger = DualLogger(output_dir="study_data")
 
 # ── Study Flow State Machine ───────────────────────────────────────────────────
 

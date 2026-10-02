@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import streamlit as st
 from interfaces.shared_components.participant_session import initialize_session, clear_session_file
 from interfaces.shared_components.questionnaire_forms import render_qualitative_form
-from study_response_logger import StudyResponseLogger
+from utils.dual_logger import DualLogger
 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -38,7 +38,7 @@ st.markdown("""
 initialize_session()
 
 # ── Initialize logger ──────────────────────────────────────────────────────────
-logger = StudyResponseLogger(output_dir="study_data")
+logger = DualLogger(output_dir="study_data")
 
 # ── Header ─────────────────────────────────────────────────────────────────────
 st.title("✅ Final Feedback")
