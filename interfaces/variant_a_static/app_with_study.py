@@ -375,6 +375,8 @@ else:
     
     st.info("**Write this down or remember it!** You'll need to enter this ID when you open Variant B.")
     
+    st.caption("Format example: P_20241002_143052 (includes date and time for uniqueness)")
+    
     st.markdown("""
     **Please continue to the next part of the study:**
     

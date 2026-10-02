@@ -179,12 +179,12 @@ if st.session_state.participant_id is None:
     
     with st.form("participant_id_form"):
         st.markdown("### Enter Your Participant ID")
-        st.caption("Your Participant ID was shown at the end of Variant A (e.g., P001, P002, etc.)")
+        st.caption("Your Participant ID was shown at the end of Variant A (e.g., P_20241002_143052)")
         
         participant_id_input = st.text_input(
             "Participant ID",
-            placeholder="P001",
-            help="Enter the ID you received after completing Variant A"
+            placeholder="P_20241002_143052",
+            help="Enter the ID you received after completing Variant A (format: P_YYYYMMDD_HHMMSS)"
         ).strip().upper()
         
         submit_btn = st.form_submit_button("Continue to Variant B", type="primary", use_container_width=True)
@@ -196,7 +196,7 @@ if st.session_state.participant_id is None:
                 st.success(f"Welcome back, {participant_id_input}!")
                 st.rerun()
             else:
-                st.error("Please enter a valid Participant ID (e.g., P001)")
+                st.error("Please enter a valid Participant ID starting with 'P'")
     
     st.stop()
 

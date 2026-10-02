@@ -6,6 +6,8 @@ Automatically uses GitHub API when configured, falls back to CSV for local devel
 This allows:
 - Cloud deployments → Write to GitHub 'data' branch (no app restarts)
 - Local development → Write to CSV files (no setup needed)
+
+Version: 2.0 - Silent sync (no UI messages)
 ─────────────────────────────────────────────────────────────────────────────
 """
 
