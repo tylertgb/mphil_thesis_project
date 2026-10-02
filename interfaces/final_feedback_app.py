@@ -47,14 +47,28 @@ st.markdown("---")
 
 # Check if participant ID exists
 if st.session_state.participant_id is None:
-    st.error("⚠️ No participant session found.")
-    st.info("Please ensure you've completed both Variant A and Variant B before accessing this page.")
+    st.info("👋 **Welcome to the Final Feedback Form**")
+    st.markdown("Please enter your Participant ID to continue.")
     
-    if st.button("Manual Entry - Researcher Only", type="secondary"):
-        manual_id = st.text_input("Enter Participant ID:", placeholder="e.g., P001")
-        if manual_id:
-            st.session_state.participant_id = manual_id
-            st.rerun()
+    with st.form("participant_id_form"):
+        st.markdown("### Enter Your Participant ID")
+        st.caption("This is the ID you received from Variant A and used in Variant B (e.g., P001, P002, etc.)")
+        
+        participant_id_input = st.text_input(
+            "Participant ID",
+            placeholder="P001",
+            help="Enter your participant ID"
+        ).strip().upper()
+        
+        submit_btn = st.form_submit_button("Continue to Feedback", type="primary", use_container_width=True)
+        
+        if submit_btn:
+            if participant_id_input and participant_id_input.startswith("P"):
+                st.session_state.participant_id = participant_id_input
+                st.success(f"✅ Welcome back, {participant_id_input}!")
+                st.rerun()
+            else:
+                st.error("Please enter a valid Participant ID (e.g., P001)")
     
     st.stop()
 
