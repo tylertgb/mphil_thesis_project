@@ -150,7 +150,7 @@ if not st.session_state.demographics_completed:
     if demographics_data:
         logger.log_demographics(st.session_state.participant_id, demographics_data)
         st.session_state.demographics_completed = True
-        st.success("✅ Demographics saved! Moving to task cases...")
+        st.success("Demographics saved! Moving to task cases...")
         st.balloons()
         st.rerun()
     
@@ -238,7 +238,7 @@ if current_task_idx < len(VARIANT_A_TASKS):
         is_at_risk = task_case['predicted_label'] == 0
         
         box_class = "at-risk" if is_at_risk else "success"
-        emoji = "⚠️" if is_at_risk else "✅"
+        emoji = "⚠" if is_at_risk else "✓"
         color = "#C53030" if is_at_risk else "#276749"
         prob_display = (1 - prob) if is_at_risk else prob
         
@@ -251,7 +251,7 @@ if current_task_idx < len(VARIANT_A_TASKS):
         
         st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
         
-        st.info("📝 **Please review the prediction above, then click Continue to provide your feedback.**")
+        st.info("**Please review the prediction above, then click Continue to provide your feedback.**")
         
         # Navigation buttons at bottom
         col1, col2 = st.columns([1, 3])
@@ -293,7 +293,7 @@ if current_task_idx < len(VARIANT_A_TASKS):
             mark_task_completed(task_id)
             st.session_state.current_task_index += 1
             
-            st.success(f"✅ Task {current_task_idx + 1} completed!")
+            st.success(f"Task {current_task_idx + 1} completed!")
             st.rerun()
 
 # ── Phase 3: Post-Variant Questionnaires ───────────────────────────────────────
@@ -316,7 +316,7 @@ elif not st.session_state.variant_completed:
         if sus_responses:
             logger.log_sus(st.session_state.participant_id, "variant_a", sus_responses)
             st.session_state.sus_completed_a = True
-            st.success("✅ SUS responses saved!")
+            st.success("SUS responses saved!")
             st.rerun()
         st.stop()
     
@@ -326,7 +326,7 @@ elif not st.session_state.variant_completed:
         if trust_responses:
             logger.log_trust(st.session_state.participant_id, "variant_a", trust_responses)
             st.session_state.trust_completed_a = True
-            st.success("✅ Trust responses saved!")
+            st.success("Trust responses saved!")
             st.rerun()
         st.stop()
     
@@ -344,13 +344,13 @@ elif not st.session_state.variant_completed:
             # Save session to file so Variant B can access it
             save_session_to_file()
             
-            st.success("✅ All responses saved for Variant A!")
+            st.success("All responses saved for Variant A!")
             st.rerun()
         st.stop()
 
 # ── Phase 4: Completion ────────────────────────────────────────────────────────
 else:
-    st.title("✅ Variant A Completed!")
+    st.title("Variant A Completed!")
     st.markdown("---")
     
     st.success(f"""
@@ -366,24 +366,24 @@ else:
     st.markdown("---")
     
     st.info("""
-    ### 📋 Next Step: Proceed to Variant B
+    ### Next Step: Proceed to Variant B
     
-    **🎯 IMPORTANT: Please note your Participant ID below**
+    **IMPORTANT: Please note your Participant ID below**
     """)
     
     st.markdown(f"## Your Participant ID: **{st.session_state.participant_id}**")
     
-    st.info("📝 **Write this down or remember it!** You'll need to enter this ID when you open Variant B.")
+    st.info("**Write this down or remember it!** You'll need to enter this ID when you open Variant B.")
     
     st.markdown("""
     **Please continue to the next part of the study:**
     
-    👉 Click the button below to access Variant B (Progressive Disclosure Interface):
+    Click the button below to access Variant B (Progressive Disclosure Interface):
     """)
     
     # Red Streamlit-style button that opens in new tab
     st.link_button(
-        "🔗 Open Variant B - Progressive Interface",
+        "Open Variant B - Progressive Interface",
         "https://mphil-study-variant-b.streamlit.app",
         use_container_width=True,
         type="primary"
@@ -402,6 +402,6 @@ else:
     """)
     
     st.markdown("---")
-    st.success(f"✅ Session saved: {st.session_state.participant_id}")
-    st.info("💾 Your progress is automatically saved. You can continue on any device.")
+    st.info(f"Session saved: {st.session_state.participant_id}")
+
 

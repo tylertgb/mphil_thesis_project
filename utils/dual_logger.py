@@ -47,13 +47,8 @@ class DualLogger:
                     self.github_logger = GitHubLogger()
                     if self.github_logger.enabled:
                         self.github_enabled = True
-                        st.success("✅ Connected to GitHub - data will sync to 'data' branch!")
-                    else:
-                        st.info("ℹ️ GitHub API not configured - using local CSV storage")
             except Exception as e:
-                st.warning(f"⚠️ GitHub connection failed: {e}\nUsing CSV fallback.")
-        else:
-            st.info("ℹ️ Using local CSV storage")
+                pass  # Silently fall back to CSV
     
     def log_demographics(self, participant_id: str, demographics: Dict[str, Any]):
         """Log demographics to both GitHub and CSV"""
@@ -63,11 +58,9 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_demographics(participant_id, demographics)
-                if success:
-                    st.toast("✅ Synced to GitHub", icon="📤")
+                self.github_logger.log_demographics(participant_id, demographics)
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_sus(self, participant_id: str, condition: str, responses: List[int]):
         """Log SUS responses to both systems"""
@@ -77,11 +70,9 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_sus(participant_id, condition, responses)
-                if success:
-                    st.toast("✅ SUS synced to GitHub", icon="📤")
+                self.github_logger.log_sus(participant_id, condition, responses)
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_trust(self, participant_id: str, condition: str, responses: List[int]):
         """Log trust responses to both systems"""
@@ -91,11 +82,9 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_trust(participant_id, condition, responses)
-                if success:
-                    st.toast("✅ Trust synced to GitHub", icon="📤")
+                self.github_logger.log_trust(participant_id, condition, responses)
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_understanding(self, participant_id: str, condition: str, responses: List[int]):
         """Log understanding responses to both systems"""
@@ -105,11 +94,9 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_understanding(participant_id, condition, responses)
-                if success:
-                    st.toast("✅ Understanding synced to GitHub", icon="📤")
+                self.github_logger.log_understanding(participant_id, condition, responses)
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_decision_confidence(
         self, 
@@ -127,13 +114,11 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_decision_confidence(
+                self.github_logger.log_decision_confidence(
                     participant_id, condition, task_case_id, responses
                 )
-                if success:
-                    st.toast("✅ Confidence synced to GitHub", icon="📤")
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_qualitative_feedback(
         self,
@@ -158,7 +143,7 @@ class DualLogger:
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                success = self.github_logger.log_qualitative_feedback(
+                self.github_logger.log_qualitative_feedback(
                     participant_id,
                     q1_most_useful,
                     q2_challenges,
@@ -166,10 +151,8 @@ class DualLogger:
                     q4_preference,
                     q4_preference_reason,
                 )
-                if success:
-                    st.toast("✅ Feedback synced to GitHub", icon="📤")
             except Exception as e:
-                st.warning(f"GitHub sync failed: {e}")
+                pass  # Silently continue with CSV backup
     
     def log_session_metadata(
         self,

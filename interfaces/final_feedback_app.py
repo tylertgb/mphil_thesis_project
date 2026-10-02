@@ -22,7 +22,7 @@ from utils.dual_logger import DualLogger
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Final Feedback - Study Complete",
-    page_icon="✅",
+    page_icon="✓",
     layout="centered",
 )
 
@@ -41,13 +41,13 @@ initialize_session()
 logger = DualLogger(output_dir="study_data")
 
 # ── Header ─────────────────────────────────────────────────────────────────────
-st.title("✅ Final Feedback")
+st.title("Final Feedback")
 st.caption("User Study - Section F")
 st.markdown("---")
 
 # Check if participant ID exists
 if st.session_state.participant_id is None:
-    st.info("👋 **Welcome to the Final Feedback Form**")
+    st.info("**Welcome to the Final Feedback Form**")
     st.markdown("Please enter your Participant ID to continue.")
     
     with st.form("participant_id_form"):
@@ -65,7 +65,7 @@ if st.session_state.participant_id is None:
         if submit_btn:
             if participant_id_input and participant_id_input.startswith("P"):
                 st.session_state.participant_id = participant_id_input
-                st.success(f"✅ Welcome back, {participant_id_input}!")
+                st.success(f"Welcome back, {participant_id_input}!")
                 st.rerun()
             else:
                 st.error("Please enter a valid Participant ID (e.g., P001)")
@@ -102,19 +102,19 @@ if not st.session_state.final_feedback_completed:
         # Clear session file - study is complete
         clear_session_file()
         
-        st.success("✅ Final feedback saved successfully!")
+        st.success("Final feedback saved successfully!")
         st.balloons()
         st.rerun()
 
 else:
     # Already completed
-    st.success("✅ **Study Complete!**")
+    st.success("**Study Complete!**")
     st.balloons()
     
     st.markdown("---")
     
     st.markdown(f"""
-    ## 🎉 Thank you for participating in this research study!
+    ## Thank you for participating in this research study!
     
     All your responses have been securely recorded and will contribute to understanding 
     how explanation interfaces support decision-making in educational contexts.
@@ -123,20 +123,20 @@ else:
     
     ### What happens next?
     
-    - ✅ Your data is saved and will be analyzed
-    - 📊 Results will be included in the research thesis
-    - 📧 You may contact the researcher if you have questions
+    - Your data is saved and will be analyzed
+    - Results will be included in the research thesis
+    - You may contact the researcher if you have questions
     
     ---
     
     **Study Overview:**
-    - ✅ Variant A (Static Interface) - Completed
-    - ✅ Variant B (Progressive Interface) - Completed  
-    - ✅ Final Comparison Feedback - Completed
+    - Variant A (Static Interface) - Completed
+    - Variant B (Progressive Interface) - Completed  
+    - Final Comparison Feedback - Completed
     
     **Total time invested:** ~30-45 minutes
     
-    Your participation is greatly appreciated! 🙏
+    Your participation is greatly appreciated!
     """)
     
     st.markdown("---")

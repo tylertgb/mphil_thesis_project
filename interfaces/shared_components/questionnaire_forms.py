@@ -85,7 +85,7 @@ def render_demographics_form() -> Optional[Dict]:
             # Validation
             if not all([age_group, gender, education_level, role.strip(), 
                        years_experience, ai_experience, decision_tools]):
-                st.error("⚠️ Please complete all fields before continuing.")
+                st.error("Please complete all fields before continuing.")
                 return None
             
             # Map experience levels to numeric scale for logger compatibility
@@ -155,7 +155,7 @@ def render_sus_form() -> Optional[List[int]]:
         
         if submitted:
             if None in responses or 0 in responses:
-                st.error("⚠️ Please respond to all items.")
+                st.error("Please respond to all items.")
                 return None
             return responses
     
@@ -203,7 +203,7 @@ def render_trust_form() -> Optional[List[int]]:
         
         if submitted:
             if None in responses or 0 in responses:
-                st.error("⚠️ Please respond to all items.")
+                st.error("Please respond to all items.")
                 return None
             return responses
     
@@ -251,7 +251,7 @@ def render_understanding_form() -> Optional[List[int]]:
         
         if submitted:
             if None in responses or 0 in responses:
-                st.error("⚠️ Please respond to all items.")
+                st.error("Please respond to all items.")
                 return None
             return responses
     
@@ -271,7 +271,7 @@ def render_decision_confidence_form(task_case_id: str) -> Optional[List[int]]:
     Returns:
         list: 4 Likert responses (1-5), or None if incomplete
     """
-    st.subheader(f"✅ Decision Confidence")
+    st.subheader(f"Decision Confidence")
     st.markdown(f"Please rate your confidence in the decision you just made for **{task_case_id}**.")
     st.markdown("**Scale:** 1 = Strongly Disagree | 5 = Strongly Agree")
     st.markdown("---")
@@ -301,7 +301,7 @@ def render_decision_confidence_form(task_case_id: str) -> Optional[List[int]]:
         
         if submitted:
             if None in responses or 0 in responses:
-                st.error("⚠️ Please respond to all items.")
+                st.error("Please respond to all items.")
                 return None
             return responses
     

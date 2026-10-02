@@ -174,7 +174,7 @@ logger = DualLogger(output_dir="study_data")
 
 # Check if participant ID exists - manual entry if not
 if st.session_state.participant_id is None:
-    st.warning("⚠️ **No active session found**")
+    st.warning("No active session found")
     st.info("Please enter your Participant ID from Variant A to continue.")
     
     with st.form("participant_id_form"):
@@ -193,7 +193,7 @@ if st.session_state.participant_id is None:
             if participant_id_input and participant_id_input.startswith("P"):
                 st.session_state.participant_id = participant_id_input
                 st.session_state.demographics_completed = True
-                st.success(f"✅ Welcome back, {participant_id_input}!")
+                st.success(f"Welcome back, {participant_id_input}!")
                 st.rerun()
             else:
                 st.error("Please enter a valid Participant ID (e.g., P001)")
@@ -298,7 +298,7 @@ if current_task_idx < len(VARIANT_B_TASKS):
         is_at_risk = task_case['predicted_label'] == 0
         
         box_class = "at-risk" if is_at_risk else "success"
-        emoji = "⚠️" if is_at_risk else "✅"
+        emoji = "⚠" if is_at_risk else "✓"
         color = "#C53030" if is_at_risk else "#276749"
         prob_display = (1 - prob) if is_at_risk else prob
         
@@ -369,7 +369,7 @@ if current_task_idx < len(VARIANT_B_TASKS):
         
         st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
         
-        st.info("📝 **Please review the prediction and explanation above, then click Continue.**")
+        st.info("**Please review the prediction and explanation above, then click Continue.**")
         
         # Navigation buttons at bottom
         col1, col2 = st.columns([1, 3])
@@ -411,12 +411,12 @@ if current_task_idx < len(VARIANT_B_TASKS):
             mark_task_completed(task_id)
             st.session_state.current_task_index_b += 1
             
-            st.success(f"✅ Task {current_task_idx + 1} completed!")
+            st.success(f"Task {current_task_idx + 1} completed!")
             st.rerun()
 
 # ── Phase 2: Post-Variant Questionnaires ───────────────────────────────────────
 elif not st.session_state.variant_b_completed:
-    st.title("✅ System Evaluation")
+    st.title("System Evaluation")
     st.markdown("Please complete the following questionnaires about your experience with Variant B.")
     st.markdown("---")
     
@@ -434,7 +434,7 @@ elif not st.session_state.variant_b_completed:
         if sus_responses:
             logger.log_sus(st.session_state.participant_id, "variant_b", sus_responses)
             st.session_state.sus_completed_b = True
-            st.success("✅ SUS responses saved!")
+            st.success("SUS responses saved!")
             st.rerun()
         st.stop()
     
@@ -444,7 +444,7 @@ elif not st.session_state.variant_b_completed:
         if trust_responses:
             logger.log_trust(st.session_state.participant_id, "variant_b", trust_responses)
             st.session_state.trust_completed_b = True
-            st.success("✅ Trust responses saved!")
+            st.success("Trust responses saved!")
             st.rerun()
         st.stop()
     
@@ -462,31 +462,31 @@ elif not st.session_state.variant_b_completed:
             # Save session to track completion
             save_session_to_file()
             
-            st.success("✅ All responses saved for Variant B!")
+            st.success("All responses saved for Variant B!")
             st.rerun()
         st.stop()
 
 # ── Phase 3: Completion ────────────────────────────────────────────────────────
 else:
-    st.title("✅ Variant B Completed!")
+    st.title("Variant B Completed!")
     st.markdown("---")
     
     st.success(f"""
-    **🎉 Thank you for completing Variant B!**
+    **Thank you for completing Variant B!**
     
     You have finished:
     - {len(VARIANT_B_TASKS)} task cases
     - 3 evaluation questionnaires
     """)
     
-    st.markdown("### 📋 Final Step: Complete the Comparison Questionnaire")
+    st.markdown("### Final Step: Complete the Comparison Questionnaire")
     st.markdown("Please click the button below to share your overall feedback:")
     
     st.markdown("")  # Spacing
     
     # Red Streamlit-style button that opens in new tab
     st.link_button(
-        "📝 Open Final Feedback Form",
+        "Open Final Feedback Form",
         "https://mphil-study-final-feedback.streamlit.app",
         use_container_width=True,
         type="primary"
@@ -506,5 +506,4 @@ else:
     ---
     """)
     
-    st.success(f"✅ Session saved: {st.session_state.participant_id}")
-    st.info("💾 Your progress is automatically saved.")
+    st.info(f"Session saved: {st.session_state.participant_id}")

@@ -352,9 +352,7 @@ def save_session_to_file():
         else:
             variant = "variant_a"  # Default assume Variant A
         
-        success = save_session_to_csv(st.session_state.participant_id, variant)
-        if success:
-            st.toast(f"✅ Session saved for {st.session_state.participant_id}", icon="💾")
+        save_session_to_csv(st.session_state.participant_id, variant)
 
 
 def restore_session_from_file():
@@ -450,27 +448,19 @@ def reset_task_state(task_id: str):
 
 def show_session_status():
     """
-    Display session synchronization status in the UI.
-    Shows if GitHub API is connected and session data is persisted.
+    Display session status in the UI sidebar.
     """
-    config = _get_github_config()
-    
-    if config["enabled"]:
-        st.sidebar.success("🔗 Session synced via GitHub")
-        if st.session_state.participant_id:
-            st.sidebar.info(f"📝 {st.session_state.participant_id}")
-            
-            # Show which variants completed
-            variant_a_done = check_variant_completed(st.session_state.participant_id, "variant_a")
-            variant_b_done = check_variant_completed(st.session_state.participant_id, "variant_b")
-            
-            if variant_a_done:
-                st.sidebar.markdown("✅ Variant A completed")
-            if variant_b_done:
-                st.sidebar.markdown("✅ Variant B completed")
-    else:
-        st.sidebar.warning("⚠️ Local session only")
-        st.sidebar.caption("Configure GitHub API for cross-app persistence")
+    if st.session_state.participant_id:
+        st.sidebar.info(f"Participant: {st.session_state.participant_id}")
+        
+        # Show which variants completed
+        variant_a_done = check_variant_completed(st.session_state.participant_id, "variant_a")
+        variant_b_done = check_variant_completed(st.session_state.participant_id, "variant_b")
+        
+        if variant_a_done:
+            st.sidebar.markdown("✓ Variant A completed")
+        if variant_b_done:
+            st.sidebar.markdown("✓ Variant B completed")
 
 
 def validate_session_for_variant_b() -> bool:
@@ -487,19 +477,19 @@ def validate_session_for_variant_b() -> bool:
             st.session_state.participant_id = latest_id
             st.session_state.demographics_completed = True
         else:
-            st.error("❌ No active session found. Please complete Variant A first.")
-            st.info("👉 Open the Variant A app and complete the study before accessing Variant B.")
+            st.error("No active session found. Please complete Variant A first.")
+            st.info("Open the Variant A app and complete the study before accessing Variant B.")
             return False
     
     # Check if Variant A completed
     variant_a_done = check_variant_completed(st.session_state.participant_id, "variant_a")
     
     if not variant_a_done:
-        st.error(f"❌ Participant {st.session_state.participant_id} has not completed Variant A yet.")
-        st.info("👉 Please complete Variant A before proceeding to Variant B.")
+        st.error(f"Participant {st.session_state.participant_id} has not completed Variant A yet.")
+        st.info("Please complete Variant A before proceeding to Variant B.")
         
         # Show retry button
-        if st.button("🔄 Retry Loading Session", use_container_width=True):
+        if st.button("Retry Loading Session", use_container_width=True):
             st.rerun()
         
         return False
