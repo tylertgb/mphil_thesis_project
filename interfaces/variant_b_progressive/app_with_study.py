@@ -27,7 +27,8 @@ import streamlit as st
 from xai.shap_explainer import load_artefacts, explain
 from xai.explainer_utils import shap_bar_chart, shap_waterfall_chart
 from interfaces.shared_components.participant_session import (
-    initialize_session, mark_task_completed, get_study_progress
+    initialize_session, mark_task_completed, get_study_progress, save_session_to_file,
+    validate_session_for_variant_b, show_session_status
 )
 from interfaces.shared_components.questionnaire_forms import (
     render_sus_form, render_trust_form,
@@ -172,22 +173,12 @@ logger = StudyResponseLogger(output_dir="study_data")
 
 # ── Study Flow State Machine ───────────────────────────────────────────────────
 
-# Check if participant ID exists (should be restored from Variant A session file)
-if st.session_state.participant_id is None:
-    st.warning("⚠️ No active session found. Please complete Variant A first, or start a test session below.")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("🔄 Retry Loading Session", type="secondary", use_container_width=True):
-            st.rerun()
-    
-    with col2:
-        if st.button("🧪 Start Test Session", type="secondary", use_container_width=True):
-            st.session_state.participant_id = "P999_TEST"
-            st.session_state.demographics_completed = True
-            st.rerun()
-    
+# Validate session - must have completed Variant A
+if not validate_session_for_variant_b():
     st.stop()
+
+# Show session status in sidebar
+show_session_status()
 
 # Reset variant B tracking if needed
 if 'current_task_index_b' not in st.session_state:
@@ -444,6 +435,13 @@ elif not st.session_state.variant_b_completed:
             logger.log_understanding(st.session_state.participant_id, "variant_b", understanding_responses)
             st.session_state.understanding_completed_b = True
             st.session_state.variant_b_completed = True
+            
+            # Set variant name for session tracking
+            st.session_state.variant_name = "variant_b"
+            
+            # Save session to track completion
+            save_session_to_file()
+            
             st.success("✅ All responses saved for Variant B!")
             st.rerun()
         st.stop()

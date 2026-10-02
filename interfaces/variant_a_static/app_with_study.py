@@ -338,6 +338,9 @@ elif not st.session_state.variant_completed:
             st.session_state.understanding_completed_a = True
             st.session_state.variant_completed = True
             
+            # Set variant name for session tracking
+            st.session_state.variant_name = "variant_a"
+            
             # Save session to file so Variant B can access it
             save_session_to_file()
             
@@ -371,8 +374,11 @@ else:
     
     👉 **[Open Variant B - Progressive Interface](https://mphil-study-variant-b.streamlit.app)**
     
-    Your session will automatically continue with your Participant ID: **{st.session_state.participant_id}**
+    Your session will automatically continue with your Participant ID: **""")
     
+    st.markdown(f"**{st.session_state.participant_id}**")
+    
+    st.markdown("""
     ---
     
     **Alternative Links:**
