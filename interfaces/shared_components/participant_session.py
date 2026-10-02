@@ -6,17 +6,22 @@ Manages participant ID generation and session state for the user study.
 Features:
 - Auto-generates sequential participant IDs (P001, P002, ...)
 - Tracks progress through study phases
-- Persists session state across apps using CSV file (works on cloud deployment)
+- Persists session state across apps using GitHub API (separate data branch)
+- No app restarts (data branch isolated from code)
 ─────────────────────────────────────────────────────────────────────────────
 """
 
 import streamlit as st
 from pathlib import Path
 import csv
+import requests
+import base64
+import json
+from io import StringIO
 from datetime import datetime, timedelta
 
 
-# Session tracking via CSV (persists across deployed apps via GitHub)
+# Session tracking via GitHub API (persists across deployed apps)
 SESSIONS_FILE = Path("study_data/active_sessions.csv")
 
 
@@ -86,76 +91,219 @@ def initialize_session():
         st.session_state.study_start_time = datetime.now()
 
 
-def save_session_to_csv(participant_id: str):
-    """
-    Save participant session to CSV (works across separate Streamlit Cloud apps).
-    Creates or updates the active_sessions.csv file.
-    """
-    SESSIONS_FILE.parent.mkdir(exist_ok=True)
+def _get_github_config():
+    """Get GitHub configuration from secrets if available."""
+    if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets:
+        return {
+            "token": st.secrets["GITHUB_TOKEN"],
+            "repo": st.secrets["GITHUB_REPO"],
+            "branch": "data",
+            "enabled": True
+        }
+    return {"enabled": False}
+
+
+def _fetch_sessions_from_github():
+    """Fetch active_sessions.csv from GitHub data branch."""
+    config = _get_github_config()
+    if not config["enabled"]:
+        # Fallback to local CSV
+        if SESSIONS_FILE.exists():
+            with open(SESSIONS_FILE, 'r') as f:
+                return f.read()
+        return None
     
-    # Initialize file if it doesn't exist
-    if not SESSIONS_FILE.exists():
-        with open(SESSIONS_FILE, 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['participant_id', 'variant_a_completed', 'timestamp'])
+    url = f"https://api.github.com/repos/{config['repo']}/contents/study_data/active_sessions.csv"
+    headers = {
+        "Authorization": f"Bearer {config['token']}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    params = {"ref": config["branch"]}
     
-    # Read existing sessions
-    sessions = {}
-    if SESSIONS_FILE.exists():
-        with open(SESSIONS_FILE, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                sessions[row['participant_id']] = row
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        if response.status_code == 200:
+            content = base64.b64decode(response.json()["content"]).decode("utf-8")
+            return content
+        elif response.status_code == 404:
+            return None
+        else:
+            st.warning(f"GitHub API error: {response.json().get('message', 'Unknown error')}")
+            return None
+    except Exception as e:
+        st.warning(f"Failed to fetch session from GitHub: {e}")
+        return None
+
+
+def _save_sessions_to_github(csv_content: str):
+    """Save active_sessions.csv to GitHub data branch."""
+    config = _get_github_config()
+    if not config["enabled"]:
+        # Fallback to local CSV
+        SESSIONS_FILE.parent.mkdir(exist_ok=True)
+        with open(SESSIONS_FILE, 'w') as f:
+            f.write(csv_content)
+        return True
     
-    # Update or add this session
-    sessions[participant_id] = {
-        'participant_id': participant_id,
-        'variant_a_completed': 'True',
-        'timestamp': datetime.now().isoformat()
+    url = f"https://api.github.com/repos/{config['repo']}/contents/study_data/active_sessions.csv"
+    headers = {
+        "Authorization": f"Bearer {config['token']}",
+        "Accept": "application/vnd.github.v3+json"
     }
     
-    # Write back
-    with open(SESSIONS_FILE, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['participant_id', 'variant_a_completed', 'timestamp'])
-        writer.writeheader()
-        for session in sessions.values():
-            writer.writerow(session)
+    # Get current file SHA if exists
+    sha = None
+    params = {"ref": config["branch"]}
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        if response.status_code == 200:
+            sha = response.json()["sha"]
+    except:
+        pass
+    
+    # Encode content
+    encoded_content = base64.b64encode(csv_content.encode("utf-8")).decode("utf-8")
+    
+    # Prepare payload
+    payload = {
+        "message": f"Update session - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        "content": encoded_content,
+        "branch": config["branch"]
+    }
+    if sha:
+        payload["sha"] = sha
+    
+    try:
+        response = requests.put(url, headers=headers, data=json.dumps(payload), timeout=10)
+        if response.status_code in [200, 201]:
+            return True
+        else:
+            st.error(f"Failed to save session: {response.json().get('message', 'Unknown')}")
+            return False
+    except Exception as e:
+        st.error(f"GitHub session save failed: {e}")
+        return False
+
+
+def save_session_to_csv(participant_id: str, variant: str = "variant_a"):
+    """
+    Save participant session to GitHub data branch (or local CSV fallback).
+    Creates or updates the active_sessions.csv file.
+    
+    Args:
+        participant_id: Participant ID (e.g., P001)
+        variant: Which variant completed (variant_a or variant_b)
+    """
+    # Fetch existing sessions from GitHub
+    existing_content = _fetch_sessions_from_github()
+    
+    sessions = {}
+    if existing_content:
+        try:
+            reader = csv.DictReader(StringIO(existing_content))
+            for row in reader:
+                sessions[row['participant_id']] = row
+        except:
+            pass
+    
+    # Update or add this session
+    if participant_id in sessions:
+        # Update existing
+        sessions[participant_id][f'{variant}_completed'] = 'True'
+        sessions[participant_id]['timestamp'] = datetime.now().isoformat()
+    else:
+        # Create new
+        sessions[participant_id] = {
+            'participant_id': participant_id,
+            'variant_a_completed': 'True' if variant == 'variant_a' else 'False',
+            'variant_b_completed': 'True' if variant == 'variant_b' else 'False',
+            'timestamp': datetime.now().isoformat()
+        }
+    
+    # Convert back to CSV
+    output = StringIO()
+    fieldnames = ['participant_id', 'variant_a_completed', 'variant_b_completed', 'timestamp']
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    for session in sessions.values():
+        # Ensure all fields exist
+        row = {
+            'participant_id': session.get('participant_id', ''),
+            'variant_a_completed': session.get('variant_a_completed', 'False'),
+            'variant_b_completed': session.get('variant_b_completed', 'False'),
+            'timestamp': session.get('timestamp', datetime.now().isoformat())
+        }
+        writer.writerow(row)
+    
+    csv_content = output.getvalue()
+    
+    # Save to GitHub (or local)
+    return _save_sessions_to_github(csv_content)
 
 
 def get_latest_participant_id() -> str:
     """
-    Get the most recent participant ID from active sessions.
+    Get the most recent participant ID from active sessions (from GitHub).
     Used when Variant B is opened to find the current participant.
     """
-    if not SESSIONS_FILE.exists():
+    existing_content = _fetch_sessions_from_github()
+    
+    if not existing_content:
         return None
     
     try:
-        with open(SESSIONS_FILE, 'r') as f:
-            reader = csv.DictReader(f)
-            sessions = list(reader)
-            
-            if not sessions:
-                return None
-            
-            # Get most recent session (within last 2 hours)
-            recent_sessions = []
-            for session in sessions:
-                try:
-                    timestamp = datetime.fromisoformat(session['timestamp'])
-                    if datetime.now() - timestamp < timedelta(hours=2):
-                        recent_sessions.append(session)
-                except (ValueError, KeyError):
-                    continue
-            
-            if recent_sessions:
-                # Return most recent
-                latest = max(recent_sessions, key=lambda s: s['timestamp'])
-                return latest['participant_id']
-            
+        reader = csv.DictReader(StringIO(existing_content))
+        sessions = list(reader)
+        
+        if not sessions:
+            return None
+        
+        # Get most recent session (within last 2 hours)
+        recent_sessions = []
+        for session in sessions:
+            try:
+                timestamp = datetime.fromisoformat(session['timestamp'])
+                if datetime.now() - timestamp < timedelta(hours=2):
+                    recent_sessions.append(session)
+            except (ValueError, KeyError):
+                continue
+        
+        if recent_sessions:
+            # Return most recent
+            latest = max(recent_sessions, key=lambda s: s['timestamp'])
+            return latest['participant_id']
+        
         return None
-    except (FileNotFoundError, csv.Error):
+    except Exception as e:
+        st.warning(f"Error reading sessions: {e}")
         return None
+
+
+def check_variant_completed(participant_id: str, variant: str = "variant_a") -> bool:
+    """
+    Check if a participant has completed a specific variant.
+    
+    Args:
+        participant_id: Participant ID (e.g., P001)
+        variant: variant_a or variant_b
+    
+    Returns:
+        True if variant completed, False otherwise
+    """
+    existing_content = _fetch_sessions_from_github()
+    
+    if not existing_content:
+        return False
+    
+    try:
+        reader = csv.DictReader(StringIO(existing_content))
+        for row in reader:
+            if row['participant_id'] == participant_id:
+                return row.get(f'{variant}_completed', 'False') == 'True'
+        return False
+    except Exception as e:
+        st.warning(f"Error checking variant completion: {e}")
+        return False
 
 
 def initialize_session():
@@ -198,7 +346,15 @@ def save_session_to_file():
     Call this when moving from Variant A to Variant B.
     """
     if st.session_state.participant_id:
-        save_session_to_csv(st.session_state.participant_id)
+        # Determine which variant was completed
+        if 'variant_name' in st.session_state:
+            variant = st.session_state.variant_name
+        else:
+            variant = "variant_a"  # Default assume Variant A
+        
+        success = save_session_to_csv(st.session_state.participant_id, variant)
+        if success:
+            st.toast(f"✅ Session saved for {st.session_state.participant_id}", icon="💾")
 
 
 def restore_session_from_file():
@@ -289,3 +445,63 @@ def reset_task_state(task_id: str):
     # Remove from completed tasks
     if task_id in st.session_state.tasks_completed:
         st.session_state.tasks_completed.remove(task_id)
+
+
+
+def show_session_status():
+    """
+    Display session synchronization status in the UI.
+    Shows if GitHub API is connected and session data is persisted.
+    """
+    config = _get_github_config()
+    
+    if config["enabled"]:
+        st.sidebar.success("🔗 Session synced via GitHub")
+        if st.session_state.participant_id:
+            st.sidebar.info(f"📝 {st.session_state.participant_id}")
+            
+            # Show which variants completed
+            variant_a_done = check_variant_completed(st.session_state.participant_id, "variant_a")
+            variant_b_done = check_variant_completed(st.session_state.participant_id, "variant_b")
+            
+            if variant_a_done:
+                st.sidebar.markdown("✅ Variant A completed")
+            if variant_b_done:
+                st.sidebar.markdown("✅ Variant B completed")
+    else:
+        st.sidebar.warning("⚠️ Local session only")
+        st.sidebar.caption("Configure GitHub API for cross-app persistence")
+
+
+def validate_session_for_variant_b() -> bool:
+    """
+    Validate that Variant A was completed before allowing Variant B.
+    
+    Returns:
+        True if session is valid, False if Variant A not completed
+    """
+    if not st.session_state.participant_id:
+        # Try to load latest session
+        latest_id = get_latest_participant_id()
+        if latest_id:
+            st.session_state.participant_id = latest_id
+            st.session_state.demographics_completed = True
+        else:
+            st.error("❌ No active session found. Please complete Variant A first.")
+            st.info("👉 Open the Variant A app and complete the study before accessing Variant B.")
+            return False
+    
+    # Check if Variant A completed
+    variant_a_done = check_variant_completed(st.session_state.participant_id, "variant_a")
+    
+    if not variant_a_done:
+        st.error(f"❌ Participant {st.session_state.participant_id} has not completed Variant A yet.")
+        st.info("👉 Please complete Variant A before proceeding to Variant B.")
+        
+        # Show retry button
+        if st.button("🔄 Retry Loading Session", use_container_width=True):
+            st.rerun()
+        
+        return False
+    
+    return True
