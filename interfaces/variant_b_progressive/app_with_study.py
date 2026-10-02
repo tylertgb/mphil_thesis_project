@@ -457,23 +457,30 @@ else:
     You have finished:
     - {len(VARIANT_B_TASKS)} task cases
     - 3 evaluation questionnaires
-    
-    ### 📋 Final Step: Complete the Comparison Questionnaire
-    
-    Please click the link below to share your overall feedback:
-    
-    👉 **[Open Final Feedback Form](https://mphil-study-final-feedback.streamlit.app)**
-    
-    This is the last part of the study where you'll compare both interfaces.
     """)
+    
+    st.markdown("### 📋 Final Step: Complete the Comparison Questionnaire")
+    st.markdown("Please click the button below to share your overall feedback:")
+    
+    # Use HTML button to open in same tab
+    st.markdown("""
+    <a href="https://mphil-study-final-feedback.streamlit.app" target="_self" 
+       style="display: inline-block; padding: 12px 24px; background-color: #FF4B4B; 
+       color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px 0;">
+        👉 Open Final Feedback Form
+    </a>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("This is the last part of the study where you'll compare both interfaces.")
     
     st.markdown("---")
     
-    # Show clickable link as button alternative
     st.markdown("""
-    **Direct Links:**
-    - 📝 [Final Feedback Form](https://mphil-study-final-feedback.streamlit.app)
-    - 🔄 [Return to Variant A](https://mphil-study-variant-a.streamlit.app) *(if needed)*
+    **Alternative: Copy this link**
+    ```
+    https://mphil-study-final-feedback.streamlit.app
+    ```
     """)
     
     st.markdown("---")
