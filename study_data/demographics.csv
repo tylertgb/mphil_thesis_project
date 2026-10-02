@@ -1,4 +1,0 @@
-participant_id,age_group,gender,education_level,role,years_experience,familiarity_with_analytics,timestamp
-P001,30-39,Male,Master's degree,lecturer,11-15 years,1,2026-09-30T11:48:22.377992
-P002,40-49,Male,Doctoral degree (PhD/EdD),Lecturer,6-10 years,5,2026-09-30T13:00:15.287326
-P003,40-49,Male,Master's degree,lecturer,3-5 years,5,2026-09-30T13:59:01.563294
