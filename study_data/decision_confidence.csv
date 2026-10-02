@@ -1,0 +1,2 @@
+participant_id,condition,task_case_id,confidence_1,confidence_2,confidence_3,confidence_4,confidence_mean,timestamp
+P004,variant_a,high_risk_1,3,4,4,4,3.75,2026-10-02T10:18:18.951435
