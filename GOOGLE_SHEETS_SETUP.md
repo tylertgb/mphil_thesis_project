@@ -40,7 +40,7 @@ This guide will help you set up Google Sheets for real-time data collection from
 6. Click **"Done"**
 
 ---
-
+To Continue
 ## Step 4: Generate JSON Key
 
 1. In **"Credentials"**, find your service account
