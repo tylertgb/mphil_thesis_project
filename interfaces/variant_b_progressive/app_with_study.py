@@ -13,7 +13,7 @@ Three-layer progressive disclosure:
   Layer 2 (expander 1)      — Human-readable, non-technical explanation
   Layer 3 (expander 2)      — Technical SHAP charts and contribution table
 ─────────────────────────────────────────────────────────────────────────────
-Run:  streamlit run interfaces/variant_b_progressive/app_with_study.py
+Deployed URL: https://mphil-study-variant-b.streamlit.app
 """
 
 import sys
@@ -454,19 +454,30 @@ else:
     st.markdown("---")
     
     st.success(f"""
-    **Thank you for completing Variant B!**
+    **🎉 Thank you for completing Variant B!**
     
     You have finished:
     - {len(VARIANT_B_TASKS)} task cases
     - 3 evaluation questionnaires
     
-    **Next steps:**
-    - Please inform the researcher that you've completed Variant B
-    - You will now complete the final qualitative feedback (Section F)
+    ### 📋 Final Step: Complete the Comparison Questionnaire
+    
+    Please click the link below to share your overall feedback:
+    
+    👉 **[Open Final Feedback Form](https://mphil-study-final-feedback.streamlit.app)**
+    
+    This is the last part of the study where you'll compare both interfaces.
     """)
     
     st.markdown("---")
-    st.caption(f"Participant ID: {st.session_state.participant_id}")
     
-    if st.button("Proceed to Final Feedback", type="primary", use_container_width=True):
-        st.info("Please inform the researcher to proceed to the final questionnaire.")
+    # Show clickable link as button alternative
+    st.markdown("""
+    **Direct Links:**
+    - 📝 [Final Feedback Form](https://mphil-study-final-feedback.streamlit.app)
+    - 🔄 [Return to Variant A](https://mphil-study-variant-a.streamlit.app) *(if needed)*
+    """)
+    
+    st.markdown("---")
+    st.success(f"✅ Session saved: {st.session_state.participant_id}")
+    st.info("💾 Your progress is automatically saved.")

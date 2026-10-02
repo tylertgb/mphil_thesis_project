@@ -12,7 +12,7 @@ Multi-page study flow:
 Shows the student risk prediction label and probability.
 No SHAP explanation is shown — this is the control condition.
 ─────────────────────────────────────────────────────────────────────────────
-Run:  streamlit run interfaces/variant_a_static/app_with_study.py
+Deployed URL: https://mphil-study-variant-a.streamlit.app
 """
 
 import sys
@@ -365,23 +365,22 @@ else:
     st.info("""
     ### 📋 Next Step: Proceed to Variant B
     
-    **Please follow these instructions:**
+    **Please continue to the next part of the study:**
     
-    1. Keep this window open (or note your Participant ID)
-    2. Open a new browser tab
-    3. Navigate to: **http://localhost:8501** (or the URL shown in your terminal)
-    4. Your session will automatically continue with Variant B
+    Click the link below to access Variant B (Progressive Disclosure Interface):
     
-    **OR ask the researcher to open Variant B for you.**
+    👉 **[Open Variant B - Progressive Interface](https://mphil-study-variant-b.streamlit.app)**
+    
+    Your session will automatically continue with your Participant ID: **{st.session_state.participant_id}**
+    
+    ---
+    
+    **Alternative Links:**
+    - 🔗 [Variant B (Progressive)](https://mphil-study-variant-b.streamlit.app)
+    - 📝 [Final Feedback Form](https://mphil-study-final-feedback.streamlit.app) *(complete after Variant B)*
     """)
     
     st.markdown("---")
-    
-    # Copy-paste command for researcher
-    with st.expander("🔧 For Researchers: Command to Run Variant B"):
-        st.code("streamlit run interfaces/variant_b_progressive/app_with_study.py", language="bash")
-        st.caption("Run this command in a new terminal while keeping Variant A open.")
-    
-    st.markdown("---")
-    st.caption(f"Session saved: {st.session_state.participant_id}")
+    st.success(f"✅ Session saved: {st.session_state.participant_id}")
+    st.info("💾 Your progress is automatically saved. You can continue on any device.")
 

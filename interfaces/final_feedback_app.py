@@ -95,17 +95,43 @@ if not st.session_state.final_feedback_completed:
 else:
     # Already completed
     st.success("✅ **Study Complete!**")
+    st.balloons()
+    
     st.markdown("---")
     
     st.markdown(f"""
-    **Thank you for participating in this research study!**
+    ## 🎉 Thank you for participating in this research study!
     
-    All your responses have been recorded.
+    All your responses have been securely recorded and will contribute to understanding 
+    how explanation interfaces support decision-making in educational contexts.
     
     **Participant ID:** {st.session_state.participant_id}
     
-    Please inform the researcher that you have completed the study.
+    ### What happens next?
+    
+    - ✅ Your data is saved and will be analyzed
+    - 📊 Results will be included in the research thesis
+    - 📧 You may contact the researcher if you have questions
+    
+    ---
+    
+    **Study Overview:**
+    - ✅ Variant A (Static Interface) - Completed
+    - ✅ Variant B (Progressive Interface) - Completed  
+    - ✅ Final Comparison Feedback - Completed
+    
+    **Total time invested:** ~30-45 minutes
+    
+    Your participation is greatly appreciated! 🙏
     """)
     
     st.markdown("---")
-    st.caption("You may now close this window.")
+    
+    st.info("""
+    **Questions or feedback?**
+    
+    If you have any questions about this study or would like to learn about the results, 
+    please contact the researcher through your original participation channel.
+    """)
+    
+    st.caption("You may now close this window. Thank you again!")
