@@ -1,0 +1,2 @@
+participant_id,condition,trust_1,trust_2,trust_3,trust_4,trust_5,trust_mean,timestamp
+P004,variant_a,4,4,4,5,4,4.2,2026-10-02T10:19:45.780179
