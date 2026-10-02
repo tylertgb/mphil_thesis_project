@@ -27,8 +27,7 @@ import streamlit as st
 from xai.shap_explainer import load_artefacts, explain
 from xai.explainer_utils import shap_bar_chart, shap_waterfall_chart
 from interfaces.shared_components.participant_session import (
-    initialize_session, mark_task_completed, get_study_progress, save_session_to_file,
-    validate_session_for_variant_b, show_session_status
+    initialize_session, mark_task_completed, get_study_progress, save_session_to_file
 )
 from interfaces.shared_components.questionnaire_forms import (
     render_sus_form, render_trust_form,
@@ -173,12 +172,33 @@ logger = StudyResponseLogger(output_dir="study_data")
 
 # ── Study Flow State Machine ───────────────────────────────────────────────────
 
-# Validate session - must have completed Variant A
-if not validate_session_for_variant_b():
+# Check if participant ID exists - manual entry if not
+if st.session_state.participant_id is None:
+    st.warning("⚠️ **No active session found**")
+    st.info("Please enter your Participant ID from Variant A to continue.")
+    
+    with st.form("participant_id_form"):
+        st.markdown("### Enter Your Participant ID")
+        st.caption("Your Participant ID was shown at the end of Variant A (e.g., P001, P002, etc.)")
+        
+        participant_id_input = st.text_input(
+            "Participant ID",
+            placeholder="P001",
+            help="Enter the ID you received after completing Variant A"
+        ).strip().upper()
+        
+        submit_btn = st.form_submit_button("Continue to Variant B", type="primary", use_container_width=True)
+        
+        if submit_btn:
+            if participant_id_input and participant_id_input.startswith("P"):
+                st.session_state.participant_id = participant_id_input
+                st.session_state.demographics_completed = True
+                st.success(f"✅ Welcome back, {participant_id_input}!")
+                st.rerun()
+            else:
+                st.error("Please enter a valid Participant ID (e.g., P001)")
+    
     st.stop()
-
-# Show session status in sidebar
-show_session_status()
 
 # Reset variant B tracking if needed
 if 'current_task_index_b' not in st.session_state:

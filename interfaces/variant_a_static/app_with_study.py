@@ -368,6 +368,14 @@ else:
     st.info("""
     ### 📋 Next Step: Proceed to Variant B
     
+    **🎯 IMPORTANT: Please note your Participant ID below**
+    """)
+    
+    st.markdown(f"## Your Participant ID: **{st.session_state.participant_id}**")
+    
+    st.info("📝 **Write this down or remember it!** You'll need to enter this ID when you open Variant B.")
+    
+    st.markdown("""
     **Please continue to the next part of the study:**
     
     👉 Click the button below to access Variant B (Progressive Disclosure Interface):
@@ -381,9 +389,9 @@ else:
         type="primary"
     )
     
-    st.markdown(f"""
+    st.markdown("""
     
-    Your session will automatically continue with your Participant ID: **{st.session_state.participant_id}**
+    When Variant B opens, you'll be asked to enter your Participant ID to continue your session.
     
     ---
     
