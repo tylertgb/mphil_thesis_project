@@ -369,27 +369,25 @@ else:
     ### 📋 Next Step: Proceed to Variant B
     
     **Please continue to the next part of the study:**
+    
+    👉 Click the button below to access Variant B (Progressive Disclosure Interface):
     """)
     
-    # Use HTML to open in same tab
-    st.markdown("""
-    <a href="https://mphil-study-variant-b.streamlit.app" target="_self" 
-       style="display: inline-block; padding: 12px 24px; background-color: #FF4B4B; 
-       color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-        👉 Open Variant B - Progressive Interface
-    </a>
-    """, unsafe_allow_html=True)
+    # Red Streamlit-style button that opens in new tab
+    st.link_button(
+        "🔗 Open Variant B - Progressive Interface",
+        "https://mphil-study-variant-b.streamlit.app",
+        use_container_width=True,
+        type="primary"
+    )
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(f"""
     
-    st.markdown("Your session will automatically continue with your Participant ID: **")
+    Your session will automatically continue with your Participant ID: **{st.session_state.participant_id}**
     
-    st.markdown(f"**{st.session_state.participant_id}**")
-    
-    st.markdown("""
     ---
     
-    **Alternative: Copy this link**
+    **Alternative: Copy this link if button doesn't work**
     ```
     https://mphil-study-variant-b.streamlit.app
     ```

@@ -462,27 +462,29 @@ else:
     st.markdown("### 📋 Final Step: Complete the Comparison Questionnaire")
     st.markdown("Please click the button below to share your overall feedback:")
     
-    # Use HTML button to open in same tab
-    st.markdown("""
-    <a href="https://mphil-study-final-feedback.streamlit.app" target="_self" 
-       style="display: inline-block; padding: 12px 24px; background-color: #FF4B4B; 
-       color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px 0;">
-        👉 Open Final Feedback Form
-    </a>
-    """, unsafe_allow_html=True)
+    st.markdown("")  # Spacing
     
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("This is the last part of the study where you'll compare both interfaces.")
-    
-    st.markdown("---")
+    # Red Streamlit-style button that opens in new tab
+    st.link_button(
+        "📝 Open Final Feedback Form",
+        "https://mphil-study-final-feedback.streamlit.app",
+        use_container_width=True,
+        type="primary"
+    )
     
     st.markdown("""
-    **Alternative: Copy this link**
+    
+    This is the last part of the study where you'll compare both interfaces.
+    
+    ---
+    
+    **Alternative: Copy this link if button doesn't work**
     ```
     https://mphil-study-final-feedback.streamlit.app
     ```
+    
+    ---
     """)
     
-    st.markdown("---")
     st.success(f"✅ Session saved: {st.session_state.participant_id}")
     st.info("💾 Your progress is automatically saved.")
