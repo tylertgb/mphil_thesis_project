@@ -41,13 +41,11 @@ def initialize_session():
     Initialize session state variables for tracking study progress.
     
     Call this at the start of each app (variant A and variant B).
-    If an active session exists from previous app, restore it.
-    """
-    # Try to restore from file if session is new
-    if 'participant_id' not in st.session_state or st.session_state.participant_id is None:
-        restore_session_from_file()
     
-    # Initialize defaults if still not set
+    NOTE: Does NOT restore from file automatically. 
+    Variant B should explicitly restore session, Variant A should start fresh.
+    """
+    # Initialize defaults if not set (but don't restore from file)
     if 'participant_id' not in st.session_state:
         st.session_state.participant_id = None
     

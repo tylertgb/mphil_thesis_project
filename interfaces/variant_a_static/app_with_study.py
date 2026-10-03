@@ -88,6 +88,14 @@ st.markdown("""
 # ── Initialize session ─────────────────────────────────────────────────────────
 initialize_session()
 
+# Check if this is a fresh page load (detect browser refresh or new session)
+# If participant completed the study and page is refreshed, reset to welcome screen
+if st.session_state.get('variant_completed', False):
+    # Completed study - clear session for next participant
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.rerun()
+
 # ── Load task cases ────────────────────────────────────────────────────────────
 @st.cache_data
 def load_task_cases():
@@ -413,5 +421,15 @@ else:
     
     st.markdown("---")
     st.info(f"Session saved: {st.session_state.participant_id}")
+    
+    # For researchers: Clear session button
+    st.markdown("---")
+    with st.expander("🔧 Researcher Controls"):
+        st.caption("Use this to start a new participant session on this device")
+        if st.button("Clear Session & Start New Participant", type="secondary", use_container_width=True):
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.success("Session cleared! Refresh the page to start with a new participant.")
+            st.rerun()
 
 
