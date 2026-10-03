@@ -259,14 +259,6 @@ def render_understanding_form() -> Optional[List[int]]:
             return responses
     
     return None
-        
-        if submitted:
-            if None in responses or 0 in responses:
-                st.error("Please respond to all items.")
-                return None
-            return responses
-    
-    return None
 
 
 # ── Section E: Decision Confidence ─────────────────────────────────────────────
