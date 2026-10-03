@@ -285,16 +285,11 @@ def initialize_session():
     Initialize session state variables for tracking study progress.
     
     Call this at the start of each app (variant A and variant B).
-    For Variant B, tries to restore the most recent participant session.
-    """
-    # Try to restore from CSV if session is new (for Variant B)
-    if 'participant_id' not in st.session_state or st.session_state.participant_id is None:
-        latest_id = get_latest_participant_id()
-        if latest_id:
-            st.session_state.participant_id = latest_id
-            st.session_state.demographics_completed = True
     
-    # Initialize defaults if still not set
+    NOTE: Does NOT restore from GitHub. Each browser session is independent.
+    Session only persists within the same browser for the same participant.
+    """
+    # Initialize defaults if not set (no restoration from file)
     if 'participant_id' not in st.session_state:
         st.session_state.participant_id = None
     
