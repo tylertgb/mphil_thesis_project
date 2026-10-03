@@ -143,10 +143,11 @@ def render_sus_form() -> Optional[List[int]]:
         for i, item in enumerate(items, 1):
             response = st.radio(
                 f"**{i}.** {item}",
-                options=[1, 2, 3, 4, 5],
-                format_func=lambda x: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
+                options=[None, 1, 2, 3, 4, 5],
+                format_func=lambda x: "Select..." if x is None else ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
                 horizontal=True,
-                key=f"sus_{i}"
+                key=f"sus_{i}",
+                index=0  # Default to "Select..."
             )
             responses.append(response)
             st.markdown("")
@@ -154,8 +155,8 @@ def render_sus_form() -> Optional[List[int]]:
         submitted = st.form_submit_button("Submit SUS Responses", type="primary", use_container_width=True)
         
         if submitted:
-            if None in responses or 0 in responses:
-                st.error("Please respond to all items.")
+            if None in responses:
+                st.error("Please respond to all items before submitting.")
                 return None
             return responses
     
@@ -191,10 +192,11 @@ def render_trust_form() -> Optional[List[int]]:
         for i, item in enumerate(items, 1):
             response = st.radio(
                 f"**{i}.** {item}",
-                options=[1, 2, 3, 4, 5],
-                format_func=lambda x: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
+                options=[None, 1, 2, 3, 4, 5],
+                format_func=lambda x: "Select..." if x is None else ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
                 horizontal=True,
-                key=f"trust_{i}"
+                key=f"trust_{i}",
+                index=0  # Default to "Select..."
             )
             responses.append(response)
             st.markdown("")
@@ -202,8 +204,8 @@ def render_trust_form() -> Optional[List[int]]:
         submitted = st.form_submit_button("Submit Trust Responses", type="primary", use_container_width=True)
         
         if submitted:
-            if None in responses or 0 in responses:
-                st.error("Please respond to all items.")
+            if None in responses:
+                st.error("Please respond to all items before submitting.")
                 return None
             return responses
     
@@ -239,15 +241,24 @@ def render_understanding_form() -> Optional[List[int]]:
         for i, item in enumerate(items, 1):
             response = st.radio(
                 f"**{i}.** {item}",
-                options=[1, 2, 3, 4, 5],
-                format_func=lambda x: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
+                options=[None, 1, 2, 3, 4, 5],
+                format_func=lambda x: "Select..." if x is None else ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][x-1],
                 horizontal=True,
-                key=f"understanding_{i}"
+                key=f"understanding_{i}",
+                index=0  # Default to "Select..."
             )
             responses.append(response)
             st.markdown("")
         
         submitted = st.form_submit_button("Submit Understanding Responses", type="primary", use_container_width=True)
+        
+        if submitted:
+            if None in responses:
+                st.error("Please respond to all items before submitting.")
+                return None
+            return responses
+    
+    return None
         
         if submitted:
             if None in responses or 0 in responses:
