@@ -117,38 +117,27 @@ logger = DualLogger(output_dir="study_data")
 # If no participant ID, show welcome screen
 if st.session_state.participant_id is None:
     st.title("Student Risk Prediction Study")
-    st.markdown("### Variant A: Prediction Interface")
+    st.markdown("### Interface A")
     st.markdown("---")
     
     st.markdown("""
     **Welcome to this research study!**
     
-    As an educational practitioner, you will evaluate an AI-powered system designed to predict student performance risk.
+    As an educational practitioner, you will use an AI-powered system to review student profiles.
     
     ### What You'll Do:
     
-    **1. Complete a brief background questionnaire** (2 minutes)
+    1. **Complete a brief background questionnaire** (2 minutes)
     
-    **2. Review 3 student profiles** (10 minutes)
-    - Each student's data is preloaded in the system
-    - You'll see the AI's risk prediction for each student
-    - Your task: Interpret the prediction and decide on appropriate intervention
-    - Provide feedback on your confidence in the prediction
+    2. **Review 3 student profiles** (10 minutes)
+       - Each student's data is preloaded in the system
+       - Review the prediction and provide your feedback
     
-    **3. Evaluate the system** (3 minutes)
-    - Complete questionnaires about usability, trust, and understanding
+    3. **Evaluate your experience** (3 minutes)
     
     ---
     
-    **Important:** You will use **2 different AI-powered interfaces** in this study:
-    - **Interface A** (this one): Shows predictions only
-    - **Interface B** (next): Shows predictions with explanations
-    
-    Both interfaces help educators make informed decisions about student support.
-    
-    ---
-    
-    **Estimated time:** 15 minutes for this interface  
+    **Estimated time:** 15 minutes  
     **All responses are anonymous** and used solely for research purposes.
     """)
     

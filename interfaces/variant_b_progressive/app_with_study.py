@@ -175,36 +175,19 @@ logger = DualLogger(output_dir="study_data")
 # Check if participant ID exists - manual entry if not
 if st.session_state.participant_id is None:
     st.title("Student Risk Prediction Study")
-    st.markdown("### Variant B: AI-Powered Interface with Explanations")
+    st.markdown("### Interface B")
     st.markdown("---")
     
-    st.info("""
-    **Welcome to Interface B!**
-    
-    You've completed Interface A. Now you'll experience a second AI-powered interface that provides **explanations** 
-    for its predictions.
-    """)
+    st.info("**Welcome back!** You'll now use a second interface to review different student profiles.")
     
     st.markdown("""
-    ### What You'll Do in This Interface:
+    ### What You'll Do:
     
-    **1. Review 3 different student profiles** (12 minutes)
-    - Each student's data is preloaded in the system
-    - You'll see the AI's risk prediction **with explanations**
-    - The system will explain **which factors** influenced each prediction
-    - Your task: Interpret the prediction and explanation, then decide on appropriate intervention
-    - Provide feedback on your confidence in the prediction
+    1. **Review 3 student profiles** (12 minutes)
+       - Each student's data is preloaded in the system
+       - Review the predictions and provide your feedback
     
-    **2. Evaluate this interface** (3 minutes)
-    - Complete questionnaires about usability, trust, and understanding
-    
-    ---
-    
-    **Key Difference from Interface A:**
-    - Interface A showed predictions only
-    - **Interface B** (this one) shows predictions **with AI explanations**
-    
-    This helps you understand **why** the system made each prediction.
+    2. **Evaluate your experience** (3 minutes)
     
     ---
     
@@ -213,19 +196,19 @@ if st.session_state.participant_id is None:
     
     st.markdown("---")
     st.warning("No active session found")
-    st.info("Please enter your Participant ID from Variant A to continue.")
+    st.info("Please enter your Participant ID from Interface A to continue.")
     
     with st.form("participant_id_form"):
         st.markdown("### Enter Your Participant ID")
-        st.caption("Your Participant ID was shown at the end of Variant A (e.g., P_20241002_143052)")
+        st.caption("Your Participant ID was shown at the end of Interface A (e.g., P_20241002_143052)")
         
         participant_id_input = st.text_input(
             "Participant ID",
             placeholder="P_20241002_143052",
-            help="Enter the ID you received after completing Variant A (format: P_YYYYMMDD_HHMMSS)"
+            help="Enter the ID you received after completing Interface A (format: P_YYYYMMDD_HHMMSS)"
         ).strip().upper()
         
-        submit_btn = st.form_submit_button("Continue to Variant B", type="primary", use_container_width=True)
+        submit_btn = st.form_submit_button("Continue to Interface B", type="primary", use_container_width=True)
         
         if submit_btn:
             if participant_id_input and participant_id_input.startswith("P"):
