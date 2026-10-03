@@ -175,7 +175,7 @@ logger = DualLogger(output_dir="study_data")
 # Check if participant ID exists - manual entry if not
 if st.session_state.participant_id is None:
     st.title("Student Risk Prediction Study")
-    st.markdown("### Interface B")
+    st.markdown("### Variant B (Progressive)")
     st.markdown("---")
     
     st.info("**Welcome back!** You'll now use a second interface to review different student profiles.")
@@ -196,19 +196,19 @@ if st.session_state.participant_id is None:
     
     st.markdown("---")
     st.warning("No active session found")
-    st.info("Please enter your Participant ID from Interface A to continue.")
+    st.info("Please enter your Participant ID from Variant A to continue.")
     
     with st.form("participant_id_form"):
         st.markdown("### Enter Your Participant ID")
-        st.caption("Your Participant ID was shown at the end of Interface A (e.g., P_20241002_143052)")
+        st.caption("Your Participant ID was shown at the end of Variant A (e.g., P_20241002_143052)")
         
         participant_id_input = st.text_input(
             "Participant ID",
             placeholder="P_20241002_143052",
-            help="Enter the ID you received after completing Interface A (format: P_YYYYMMDD_HHMMSS)"
+            help="Enter the ID you received after completing Variant A (format: P_YYYYMMDD_HHMMSS)"
         ).strip().upper()
         
-        submit_btn = st.form_submit_button("Continue to Interface B", type="primary", use_container_width=True)
+        submit_btn = st.form_submit_button("Continue to Variant B", type="primary", use_container_width=True)
         
         if submit_btn:
             if participant_id_input and participant_id_input.startswith("P"):
@@ -250,7 +250,7 @@ if current_task_idx < len(VARIANT_B_TASKS):
     """, unsafe_allow_html=True)
     
     st.title("Explainable Student Risk Prediction")
-    st.caption("Educational Decision-Support System  ·  Variant B  ·  Powered by SHAP")
+    st.caption("Educational Decision-Support System  ·  Variant B (Progressive)  ·  Powered by SHAP")
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     
     # Initialize state flags
@@ -489,11 +489,11 @@ elif not st.session_state.variant_b_completed:
 
 # ── Phase 3: Completion ────────────────────────────────────────────────────────
 else:
-    st.title("Variant B Completed!")
+    st.title("Variant B (Progressive) Completed!")
     st.markdown("---")
     
     st.success(f"""
-    **Thank you for completing Variant B!**
+    **Thank you for completing Variant B (Progressive)!**
     
     You have finished:
     - {len(VARIANT_B_TASKS)} task cases
@@ -515,7 +515,7 @@ else:
     
     st.markdown("""
     
-    This is the last part of the study where you'll compare both interfaces.
+    This is the last part of the study where you'll compare both interfaces (Static vs Progressive).
     
     ---
     

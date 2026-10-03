@@ -125,7 +125,7 @@ logger = DualLogger(output_dir="study_data")
 # If no participant ID, show welcome screen
 if st.session_state.participant_id is None:
     st.title("Student Risk Prediction Study")
-    st.markdown("### Interface A")
+    st.markdown("### Variant A (Static)")
     st.markdown("---")
     
     st.markdown("""
@@ -157,7 +157,7 @@ if st.session_state.participant_id is None:
 
 # Show progress
 progress = get_study_progress()
-st.caption(f"Participant ID: {st.session_state.participant_id} | Variant A")
+st.caption(f"Participant ID: {st.session_state.participant_id} | Variant A (Static)")
 
 # ── Phase 1: Demographics ──────────────────────────────────────────────────────
 if not st.session_state.demographics_completed:
@@ -192,7 +192,7 @@ if current_task_idx < len(VARIANT_A_TASKS):
     """, unsafe_allow_html=True)
     
     st.title("Student Risk Prediction")
-    st.caption("Educational Decision-Support System  ·  Variant A")
+    st.caption("Educational Decision-Support System  ·  Variant A (Static)")
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     
     # Initialize state flags
@@ -366,11 +366,11 @@ elif not st.session_state.variant_completed:
 
 # ── Phase 4: Completion ────────────────────────────────────────────────────────
 else:
-    st.title("Variant A Completed!")
+    st.title("Variant A (Static) Completed!")
     st.markdown("---")
     
     st.success(f"""
-    **Thank you for completing Variant A!**
+    **Thank you for completing Variant A (Static)!**
     
     You have finished:
     - {len(VARIANT_A_TASKS)} task cases
@@ -396,12 +396,12 @@ else:
     st.markdown("""
     **Please continue to the next part of the study:**
     
-    Click the button below to access Variant B (Progressive Disclosure Interface):
+    Click the button below to access Variant B (Progressive):
     """)
     
     # Red Streamlit-style button that opens in new tab
     st.link_button(
-        "Open Variant B - Progressive Interface",
+        "Open Variant B (Progressive)",
         "https://mphil-study-variant-b.streamlit.app",
         use_container_width=True,
         type="primary"
