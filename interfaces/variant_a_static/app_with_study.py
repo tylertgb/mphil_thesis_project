@@ -123,14 +123,33 @@ if st.session_state.participant_id is None:
     st.markdown("""
     **Welcome to this research study!**
     
-    You will be asked to:
-    1. Complete a brief demographics questionnaire
-    2. Review predictions for **3 student cases**
-    3. Provide feedback on your experience
+    As an educational practitioner, you will evaluate an AI-powered system designed to predict student performance risk.
     
-    **Estimated time:** 10-15 minutes
+    ### What You'll Do:
     
-    All responses are anonymous and will be used solely for research purposes.
+    **1. Complete a brief background questionnaire** (2 minutes)
+    
+    **2. Review 3 student profiles** (10 minutes)
+    - Each student's data is preloaded in the system
+    - You'll see the AI's risk prediction for each student
+    - Your task: Interpret the prediction and decide on appropriate intervention
+    - Provide feedback on your confidence in the prediction
+    
+    **3. Evaluate the system** (3 minutes)
+    - Complete questionnaires about usability, trust, and understanding
+    
+    ---
+    
+    **Important:** You will use **2 different AI-powered interfaces** in this study:
+    - **Interface A** (this one): Shows predictions only
+    - **Interface B** (next): Shows predictions with explanations
+    
+    Both interfaces help educators make informed decisions about student support.
+    
+    ---
+    
+    **Estimated time:** 15 minutes for this interface  
+    **All responses are anonymous** and used solely for research purposes.
     """)
     
     if st.button("Start Study", type="primary", use_container_width=True):

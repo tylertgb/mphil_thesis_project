@@ -174,6 +174,44 @@ logger = DualLogger(output_dir="study_data")
 
 # Check if participant ID exists - manual entry if not
 if st.session_state.participant_id is None:
+    st.title("Student Risk Prediction Study")
+    st.markdown("### Variant B: AI-Powered Interface with Explanations")
+    st.markdown("---")
+    
+    st.info("""
+    **Welcome to Interface B!**
+    
+    You've completed Interface A. Now you'll experience a second AI-powered interface that provides **explanations** 
+    for its predictions.
+    """)
+    
+    st.markdown("""
+    ### What You'll Do in This Interface:
+    
+    **1. Review 3 different student profiles** (12 minutes)
+    - Each student's data is preloaded in the system
+    - You'll see the AI's risk prediction **with explanations**
+    - The system will explain **which factors** influenced each prediction
+    - Your task: Interpret the prediction and explanation, then decide on appropriate intervention
+    - Provide feedback on your confidence in the prediction
+    
+    **2. Evaluate this interface** (3 minutes)
+    - Complete questionnaires about usability, trust, and understanding
+    
+    ---
+    
+    **Key Difference from Interface A:**
+    - Interface A showed predictions only
+    - **Interface B** (this one) shows predictions **with AI explanations**
+    
+    This helps you understand **why** the system made each prediction.
+    
+    ---
+    
+    **Estimated time:** 15 minutes
+    """)
+    
+    st.markdown("---")
     st.warning("No active session found")
     st.info("Please enter your Participant ID from Variant A to continue.")
     
