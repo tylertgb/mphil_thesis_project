@@ -88,14 +88,6 @@ st.markdown("""
 # ── Initialize session ─────────────────────────────────────────────────────────
 initialize_session()
 
-# Check if this is a fresh page load (detect browser refresh or new session)
-# If participant completed the study and page is refreshed, reset to welcome screen
-if st.session_state.get('variant_completed', False):
-    # Completed study - clear session for next participant
-    for key in list(st.session_state.keys()):
-        del st.session_state[key]
-    st.rerun()
-
 # ── Load task cases ────────────────────────────────────────────────────────────
 @st.cache_data
 def load_task_cases():
