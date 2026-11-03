@@ -1,16 +1,16 @@
 """
-Variant A — Control Interface with Integrated Study Questionnaires
+Variant A — Static Interface with Integrated Study Questionnaires
 ─────────────────────────────────────────────────────────────────────────────
 Multi-page study flow:
   1. Demographics (if first time)
-  2. Task Case 1 → Prediction → Decision Confidence
-  3. Task Case 2 → Prediction → Decision Confidence
-  4. Task Case 3 → Prediction → Decision Confidence
+  2. Task Case 1 → Prediction + SHAP Chart → Decision Confidence
+  3. Task Case 2 → Prediction + SHAP Chart → Decision Confidence
+  4. Task Case 3 → Prediction + SHAP Chart → Decision Confidence
   5. SUS + Trust + Understanding questionnaires
   6. Thank you + Next steps
 
-Shows the student risk prediction label and probability.
-No SHAP explanation is shown — this is the control condition.
+Shows: prediction label, probability, and SHAP bar chart (all at once, fixed layout).
+This is the baseline static condition.
 ─────────────────────────────────────────────────────────────────────────────
 Deployed URL: https://mphil-study-variant-a.streamlit.app
 """
@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import streamlit as st
 from xai.shap_explainer import load_artefacts, explain
+from xai.explainer_utils import shap_bar_chart
 from interfaces.shared_components.student_form import render_form, encode_input
 from interfaces.shared_components.participant_session import (
     initialize_session, start_new_participant, mark_task_completed, get_study_progress,
@@ -34,6 +35,7 @@ from interfaces.shared_components.questionnaire_forms import (
     render_understanding_form, render_decision_confidence_form
 )
 from utils.dual_logger import DualLogger
+import pandas as pd
 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -238,18 +240,25 @@ if current_task_idx < len(VARIANT_A_TASKS):
                 st.session_state[f"prediction_shown_{task_id}"] = True
                 st.rerun()
     
-    # State 2: Show prediction + "Continue" button
+    # State 2: Show prediction + SHAP chart + "Continue" button
     elif not st.session_state[f"ready_for_confidence_{task_id}"]:
-        # Show prediction (using actual task case prediction)
-        prob = task_case['probability']
-        label = "Success" if task_case['predicted_label'] == 1 else "At-Risk"
-        is_at_risk = task_case['predicted_label'] == 0
+        # Get actual SHAP explanation for this task case
+        features = task_case['features']
+        student_df = pd.DataFrame([features])
+        explanation = explain(student_df, model, scaler, feature_names)
+        
+        # Extract values
+        prob = explanation['probability']
+        label = explanation['label']
+        shap_values = explanation['shap_values']
+        is_at_risk = explanation['prediction'] == 0
         
         box_class = "at-risk" if is_at_risk else "success"
         emoji = "⚠" if is_at_risk else "✓"
         color = "#C53030" if is_at_risk else "#276749"
         prob_display = (1 - prob) if is_at_risk else prob
         
+        # Show prediction
         st.markdown(f"""
         <div class="risk-box {box_class}">
             <div class="risk-label" style="color:{color};">{emoji} Predicted: {label}</div>
@@ -259,7 +268,33 @@ if current_task_idx < len(VARIANT_A_TASKS):
         
         st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
         
-        st.info("**Please review the prediction above, then click Continue to provide your feedback.**")
+        # Show SHAP bar chart (static, always visible)
+        st.markdown("### Feature Impact on Prediction")
+        st.caption("This chart shows which student characteristics most influenced the prediction:")
+        
+        # Generate and display SHAP bar chart
+        fig_bar = shap_bar_chart(
+            shap_values, top_n=10, title="Top 10 Feature Contributions (SHAP Values)"
+        )
+        st.pyplot(fig_bar, use_container_width=True)
+        
+        # Legend
+        st.markdown("""
+        <div style="display: flex; gap: 24px; margin: 12px 0; font-size: 0.85rem; color: #4A5568;">
+            <div>
+                <span style="display: inline-block; width: 14px; height: 14px; background: #FC8181; border-radius: 2px; margin-right: 6px;"></span>
+                Increases risk (pushes toward At-Risk)
+            </div>
+            <div>
+                <span style="display: inline-block; width: 14px; height: 14px; background: #68D391; border-radius: 2px; margin-right: 6px;"></span>
+                Decreases risk (pushes toward Success)
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+        
+        st.info("**Please review the prediction and explanation above, then click Continue to provide your feedback.**")
         
         # Navigation buttons at bottom
         col1, col2 = st.columns([1, 3])
