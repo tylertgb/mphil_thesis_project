@@ -530,30 +530,40 @@ else:
     You will need to enter your Participant ID in the next interface.
     """)
     
-    st.markdown("")  # Spacing
-    
-    st.info(f"""
-    **Next Step:**
-    
-    1. Copy your Participant ID: `{st.session_state.participant_id}`
-    2. Click the button below to open Part 2 (Static Interface)
-    3. Enter your Participant ID when prompted
-    4. Complete the Static Interface (15 minutes)
-    5. Then complete the Final Feedback (5 minutes)
-    """)
+    st.markdown("### 📋 Your Participant ID")
+    st.info(f"**Important:** Save this ID, you'll need it in Part 2!")
     
     # Highlighted participant ID for easy copying
     st.code(st.session_state.participant_id, language=None)
     
     st.markdown("---")
     
+    st.markdown("""
+    **Please continue to Part 2 of the study:**
+    
+    Click the button below to access the Static Interface:
+    """)
+    
     # ⚠️ IMPORTANT: Replace this URL with your actual Static SECOND app URL after deployment
+    # Example: "https://mphil-study-static-second.streamlit.app"
     st.link_button(
-        "Continue to Part 2: Static Interface ➔",
-        "REPLACE_WITH_YOUR_STATIC_SECOND_URL",  # You'll update this after deploying
+        "Open Part 2: Static Interface",
+        "https://YOUR_STATIC_SECOND_URL_HERE.streamlit.app",
         use_container_width=True,
         type="primary"
     )
+    
+    st.markdown("""
+    
+    When Part 2 opens, you'll be asked to enter your Participant ID to continue.
+    
+    ---
+    
+    **Alternative: Copy this link if button doesn't work**
+    ```
+    https://YOUR_STATIC_SECOND_URL_HERE.streamlit.app
+    ```
+    """)
     
     st.markdown("---")
     st.caption("Study session saved. Please continue to Part 2 using the button above.")
