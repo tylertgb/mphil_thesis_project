@@ -35,11 +35,23 @@ class DualLogger:
     Priority:
     1. GitHub API (if configured) - for cloud deployment
     2. CSV files (always) - for backup and local development
+    
+    Counterbalancing Support:
+    - Accepts order_group parameter to track which interface order participants experienced
+    - order_group values: "group1_static_first" or "group2_progressive_first"
     """
     
-    def __init__(self, output_dir: str = "study_data"):
-        """Initialize both loggers"""
+    def __init__(self, output_dir: str = "study_data", order_group: str = "group1_static_first"):
+        """
+        Initialize both loggers
+        
+        Args:
+            output_dir: Directory for CSV files
+            order_group: Which order group the participant belongs to
+                        "group1_static_first" (default) or "group2_progressive_first"
+        """
         self.csv_logger = StudyResponseLogger(output_dir)
+        self.order_group = order_group
         
         # Check if GitHub API is configured
         self.github_enabled = False
@@ -54,13 +66,16 @@ class DualLogger:
     
     def log_demographics(self, participant_id: str, demographics: Dict[str, Any]):
         """Log demographics to both GitHub and CSV"""
+        # Add order_group to demographics
+        demographics_with_order = {**demographics, 'order_group': self.order_group}
+        
         # Always log to CSV
-        self.csv_logger.log_demographics(participant_id, demographics)
+        self.csv_logger.log_demographics(participant_id, demographics_with_order)
         
         # Try GitHub if enabled
         if self.github_enabled:
             try:
-                self.github_logger.log_demographics(participant_id, demographics)
+                self.github_logger.log_demographics(participant_id, demographics_with_order)
             except Exception as e:
                 pass  # Silently continue with CSV backup
     

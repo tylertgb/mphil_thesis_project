@@ -1,0 +1,30 @@
+EMAIL TEMPLATE FOR GROUP 2 PARTICIPANTS (17-31)
+
+Subject: Research Study Follow-Up - Your Participation Requested Again
+
+Dear [Name],
+
+Thank you for participating in our AI interface study earlier.
+
+To strengthen our research, we are implementing a counterbalanced design 
+and would appreciate your participation once more.
+
+WHAT'S DIFFERENT:
+- You'll experience the interfaces in REVERSE order
+- FIRST: Progressive Interface (15 min)
+- THEN: Static Interface (15 min)
+- Total time: ~30 minutes
+
+DEADLINE: November 30, 2026
+
+STUDY LINKS (complete in order):
+1. Progressive (First): [YOUR_URL_1_HERE]
+2. Static (Second): [YOUR_URL_2_HERE]
+3. Final Feedback: https://mphil-study-final-feedback.streamlit.app
+
+IMPORTANT: Save your Participant ID after Part 1!
+
+Thank you for your support!
+
+Best regards,
+[Your Name]
