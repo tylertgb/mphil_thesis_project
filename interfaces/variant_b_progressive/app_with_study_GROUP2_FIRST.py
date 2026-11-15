@@ -536,7 +536,7 @@ else:
     **Next Step:**
     
     1. Copy your Participant ID: `{st.session_state.participant_id}`
-    2. Open the Part 2 link (provided in your study email)
+    2. Click the button below to open Part 2 (Static Interface)
     3. Enter your Participant ID when prompted
     4. Complete the Static Interface (15 minutes)
     5. Then complete the Final Feedback (5 minutes)
@@ -546,4 +546,14 @@ else:
     st.code(st.session_state.participant_id, language=None)
     
     st.markdown("---")
-    st.caption("Study session saved. You may close this tab after copying your Participant ID.")
+    
+    # ⚠️ IMPORTANT: Replace this URL with your actual Static SECOND app URL after deployment
+    st.link_button(
+        "Continue to Part 2: Static Interface ➔",
+        "REPLACE_WITH_YOUR_STATIC_SECOND_URL",  # You'll update this after deploying
+        use_container_width=True,
+        type="primary"
+    )
+    
+    st.markdown("---")
+    st.caption("Study session saved. Please continue to Part 2 using the button above.")
