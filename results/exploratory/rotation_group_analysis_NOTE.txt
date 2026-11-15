@@ -1,0 +1,12 @@
+Rotation Group Analysis - NOT COMPLETED
+
+The study design mentioned rotation groups (Study_Task_Case_Allocation.docx),
+but the rotation_group identifier is not present in the current dataset.
+
+To complete this analysis:
+1. Identify which rotation group each participant was assigned to
+2. Add a 'rotation_group' column (1, 2, or 3) to the data
+3. Re-run this script
+
+This is an exploratory analysis and was not pre-registered, so it is
+not required for the main hypothesis tests.
