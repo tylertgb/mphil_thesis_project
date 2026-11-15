@@ -1,0 +1,13 @@
+Scale,Condition,n,Items,Cronbach α,Interpretation
+SUS,Static (A),31,10,0.811,Good
+SUS,Progressive (B),31,10,0.837,Good
+SUS,Overall,62,10,0.826,Good
+Trust,Static (A),31,5,0.911,Excellent
+Trust,Progressive (B),31,5,0.791,Acceptable
+Trust,Overall,62,5,0.877,Good
+Understanding,Static (A),31,5,0.943,Excellent
+Understanding,Progressive (B),31,5,0.938,Excellent
+Understanding,Overall,62,5,0.945,Excellent
+Decision Confidence,Static (A),95,4,0.901,Excellent
+Decision Confidence,Progressive (B),98,4,0.881,Good
+Decision Confidence,Overall,193,4,0.896,Good
