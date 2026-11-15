@@ -1,0 +1,5 @@
+Hypothesis,Test,Statistic,df,p (raw),p (Holm),Effect Size,95% CI,Direction,Supported
+H1,Pearson correlation,r = 0.799,—,0.000,—,r = 0.799,"[0.6195091394129436, 0.8986229070358661]",Positive,Yes
+H2,Paired t-test,-1.334,30,0.192,0.192,Cohen's dz: 0.240,"[-1.71, 8.17]",B > A,No
+H3,Wilcoxon signed-rank,100.500,—,0.004,0.008,Rank-biserial r: 0.419,"[0.10, 0.57]",B > A,Yes
+H4,Wilcoxon signed-rank,55.000,—,0.001,0.002,Rank-biserial r: 0.571,"[0.18, 0.65]",B > A,Yes

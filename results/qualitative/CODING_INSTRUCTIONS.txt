@@ -1,0 +1,39 @@
+
+RECOMMENDED THEMATIC ANALYSIS APPROACH:
+
+1. **Choose a file for coding:**
+   - Use qualitative_responses_long_for_coding.csv for coding software
+   - Use qualitative_responses_wide.csv for reading/overview
+
+2. **Inductive Coding Process:**
+   a. **Familiarization**: Read all responses to get overall sense
+   b. **Initial Coding**: Generate codes from the data (open coding)
+   c. **Theme Development**: Group codes into themes
+   d. **Review Themes**: Check themes work across the dataset
+   e. **Define & Name**: Clearly define each theme
+   f. **Write-up**: Produce analysis for thesis Chapter 4
+
+3. **Recommended Tools:**
+   - NVivo, ATLAS.ti, or MAXQDA (qualitative coding software)
+   - Excel/Google Sheets (manual coding using the columns provided)
+   - Dedoose (web-based, collaborative)
+
+4. **What to Look For:**
+   - Reasons for interface preference
+   - Perceived strengths/weaknesses of each interface
+   - Trust-related comments
+   - Usability issues or suggestions
+   - Understanding/comprehension mentions
+   - Decision-making process descriptions
+   - Comparison between interfaces
+
+5. **Rigor & Trustworthiness:**
+   - Consider inter-rater reliability (second coder for subset)
+   - Keep audit trail of coding decisions
+   - Include representative quotes in thesis
+   - Report theme prevalence (n participants mentioning)
+
+6. **Integration with Quantitative:**
+   - Use qualitative themes to explain quantitative findings
+   - Look for convergence/divergence
+   - Identify unexpected themes not captured in surveys

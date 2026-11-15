@@ -1,0 +1,51 @@
+Check,File,Issue,Severity
+Straight-lining,sus_responses,P_20261005_070332 (variant_b): all items = 5,MEDIUM
+Straight-lining,sus_responses,P_20261005_115120 (variant_b): all items = 4,MEDIUM
+Straight-lining,sus_responses,P_20261006_192539 (variant_b): all items = 3,MEDIUM
+Straight-lining,trust_responses,P002 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261005_040530 (variant_a): all items = 1,MEDIUM
+Straight-lining,trust_responses,P_20261005_105715 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261005_115120 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261005_115120 (variant_b): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261006_192539 (variant_a): all items = 3,MEDIUM
+Straight-lining,trust_responses,P_20261006_192539 (variant_b): all items = 3,MEDIUM
+Straight-lining,trust_responses,P_20261008_114356 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261014_121954 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261016_111950 (variant_a): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261030_082724 (variant_a): all items = 3,MEDIUM
+Straight-lining,trust_responses,P_20261107_232908 (variant_b): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261111_180801 (variant_b): all items = 4,MEDIUM
+Straight-lining,trust_responses,P_20261114_170127 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P002 (variant_b): all items = 1,MEDIUM
+Straight-lining,understanding_responses,P_20261005_040530 (variant_a): all items = 1,MEDIUM
+Straight-lining,understanding_responses,P_20261005_070332 (variant_a): all items = 1,MEDIUM
+Straight-lining,understanding_responses,P_20261005_070332 (variant_b): all items = 5,MEDIUM
+Straight-lining,understanding_responses,P_20261005_115120 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261005_115120 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261005_155222 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261007_034444 (variant_a): all items = 2,MEDIUM
+Straight-lining,understanding_responses,P_20261007_211027 (variant_a): all items = 3,MEDIUM
+Straight-lining,understanding_responses,P_20261008_114356 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261009_104852 (variant_b): all items = 3,MEDIUM
+Straight-lining,understanding_responses,P_20261014_121954 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261014_121954 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261016_111950 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261030_065658 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261030_065658 (variant_b): all items = 5,MEDIUM
+Straight-lining,understanding_responses,P_20261030_073948 (variant_a): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261030_075325 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261030_081413 (variant_b): all items = 4,MEDIUM
+Straight-lining,understanding_responses,P_20261030_082724 (variant_a): all items = 3,MEDIUM
+Straight-lining,understanding_responses,P_20261107_231244 (variant_a): all items = 3,MEDIUM
+Straight-lining,understanding_responses,P_20261114_130015 (variant_b): all items = 5,MEDIUM
+Session duration,timestamps,P_20261005_070332: 5.5 min (< 10 min),LOW
+Session duration,timestamps,P_20261007_034444: 3.8 min (< 10 min),LOW
+Session duration,timestamps,P_20261017_165607: 6.4 min (< 10 min),LOW
+Session duration,timestamps,P_20261030_073948: 6.8 min (< 10 min),LOW
+Session duration,timestamps,P_20261030_075325: 5.8 min (< 10 min),LOW
+Session duration,timestamps,P_20261030_081413: 6.5 min (< 10 min),LOW
+Session duration,timestamps,P_20261030_082724: 5.4 min (< 10 min),LOW
+Session duration,timestamps,P_20261107_231244: 6.1 min (< 10 min),LOW
+Session duration,timestamps,P_20261114_124407: 8.8 min (< 10 min),LOW
+Session duration,timestamps,P_20261005_105715: 66.4 min (> 60 min),LOW
+Session duration,timestamps,P_20261005_115120: 94.2 min (> 60 min),LOW

@@ -1,0 +1,5 @@
+Measure,AB_diff_M,AB_diff_SD,BA_diff_M,BA_diff_SD,t,p,order_effect
+SUS (Usability),5.781,9.649,6.0,9.487,-0.064,0.9497,False
+Decision Confidence,0.151,0.276,0.167,0.386,-0.13,0.8972,False
+Trust,0.312,0.526,0.187,0.558,0.646,0.5233,False
+Understanding,0.325,0.419,-0.027,1.113,1.179,0.248,False

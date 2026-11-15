@@ -1,0 +1,22 @@
+Rotation Group Analysis - NOT APPLICABLE
+
+After reviewing the study implementation (main branch code), ALL participants
+received the SAME task cases:
+- Variant A (Static): cases ["high_risk_1", "medium_risk_4", "low_risk_7"]
+- Variant B (Progressive): cases ["high_risk_2", "medium_risk_5", "low_risk_8"]
+
+There was NO rotation of task cases across participants. The "rotation groups"
+mentioned in the planning documents (Study_Task_Case_Allocation.docx) were
+not implemented in the final study design.
+
+This simplification:
+✓ Avoids confounding from case difficulty differences
+✓ Ensures all participants had identical experiences within each condition
+✓ Makes the comparison between Static and Progressive cleaner
+
+For the thesis:
+- Report that all participants received the same cases per condition
+- This is actually a STRENGTH: removes potential case-allocation confound
+- No rotation analysis needed or possible
+
+This is NOT a limitation - it's a simpler, cleaner design.
