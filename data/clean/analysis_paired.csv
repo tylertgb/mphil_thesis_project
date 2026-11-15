@@ -1,0 +1,32 @@
+participant_id,age_group,gender,education_level,role,years_experience,familiarity_with_analytics,sus_A,sus_B,trust_A,trust_B,understanding_A,understanding_B,confidence_A,confidence_B,preference,understanding_avg,trust_avg,complete_paired
+P001,30-39,Male,Master's degree,lecturer,11-15 years,1,67.5,57.5,4.4,4.2,4.2,4.4,4.5,4.333333333333333,Progressive (Variant B - with explanations),4.300000000000001,4.300000000000001,True
+P002,40-49,Male,Doctoral degree (PhD/EdD),Lecturer,6-10 years,5,82.5,77.5,4.0,3.8,4.4,1.0,4.416666666666667,3.9166666666666665,Progressive (Variant B - with explanations),2.7,3.9,True
+P003,40-49,Male,Master's degree,lecturer,3-5 years,5,72.5,67.5,4.0,4.2,3.6,3.4,4.416666666666667,4.333333333333333,Progressive (Variant B - with explanations),3.5,4.1,True
+P_20261003_085342,18-29,Male,Master's degree,tutor,3-5 years,5,52.5,57.5,2.4,3.4,1.4,4.2,2.9166666666666665,3.9166666666666665,Progressive (Variant B - with explanations),2.8,2.9,True
+P_20261005_040530,18-29,Male,Master's degree,Graduate student,0-2 years,1,10.0,22.5,1.0,3.2,1.0,1.6,1.9166666666666667,2.25,Progressive (Variant B - with explanations),1.3,2.1,True
+P_20261005_070332,30-39,Male,Master's degree,Academic tutor,6-10 years,5,72.5,50.0,1.8,4.2,1.0,5.0,2.3333333333333335,5.0,Progressive (Variant B - with explanations),3.0,3.0,True
+P_20261005_105715,50-59,Male,Master's degree,lecturer,16+ years,5,55.0,45.0,4.0,4.2,2.6,3.8,4.333333333333333,4.25,Progressive (Variant B - with explanations),3.2,4.1,True
+P_20261005_115120,40-49,Male,Master's degree,Academic Tutor,16+ years,1,80.0,50.0,4.0,4.0,4.0,4.0,3.9166666666666665,4.0,Static (Variant A - prediction only),4.0,4.0,True
+P_20261005_155222,30-39,Male,Doctoral degree (PhD/EdD),Lecturer,3-5 years,1,45.0,47.5,3.6,3.8,3.8,4.0,3.75,4.0,Progressive (Variant B - with explanations),3.9,3.7,True
+P_20261005_212120,30-39,Male,Master's degree,tutor,6-10 years,5,65.0,75.0,3.8,4.6,2.6,4.4,4.166666666666667,4.333333333333333,Progressive (Variant B - with explanations),3.5,4.199999999999999,True
+P_20261006_165607,30-39,Male,Master's degree,A student,6-10 years,1,37.5,55.0,4.0,3.6,2.2,3.8,3.8333333333333335,4.375,Progressive (Variant B - with explanations),3.0,3.8,True
+P_20261006_192539,18-29,Male,Doctoral degree (PhD/EdD),Lecturer,0-2 years,1,50.0,50.0,3.0,3.0,3.6,2.2,3.3333333333333335,2.9166666666666665,Static (Variant A - prediction only),2.9000000000000004,3.0,True
+P_20261007_034444,18-29,Male,Master's degree,student,0-2 years,1,50.0,52.5,3.2,3.2,2.0,3.6,3.4166666666666665,4.0,Progressive (Variant B - with explanations),2.8,3.2,True
+P_20261007_211027,30-39,Male,Master's degree,Assistant lecturer,0-2 years,5,70.0,75.0,3.2,3.4,3.0,2.6,3.0,3.6666666666666665,Progressive (Variant B - with explanations),2.8,3.3,True
+P_20261008_114356,40-49,Female,Master's degree,Gender Coordinator,3-5 years,1,82.5,75.0,4.0,4.2,4.0,4.4,4.166666666666667,4.416666666666667,Progressive (Variant B - with explanations),4.2,4.1,True
+P_20261008_150306,18-29,Female,Master's degree,"Instructor, researcher assistant",0-2 years,5,72.5,52.5,2.4,2.6,2.6,3.4,2.3333333333333335,2.5833333333333335,Progressive (Variant B - with explanations),3.0,2.5,True
+P_20261009_104852,30-39,Female,Master's degree,Academic advisor,6-10 years,1,60.0,47.5,3.8,3.6,3.4,3.0,3.4166666666666665,4.0,Static (Variant A - prediction only),3.2,3.7,True
+P_20261014_121954,30-39,Male,Master's degree,lecturer,3-5 years,5,70.0,75.0,4.0,3.8,4.0,4.0,4.5,4.416666666666667,Progressive (Variant B - with explanations),4.0,3.9,True
+P_20261016_111950,50-59,Male,Master's degree,Lecturer,6-10 years,1,65.0,72.5,4.0,4.2,4.0,4.2,4.25,4.0,Progressive (Variant B - with explanations),4.1,4.1,True
+P_20261017_165607,18-29,Male,Master's degree,Graduate Research & Teaching Assistant,3-5 years,5,47.5,47.5,2.8,2.4,1.8,2.8,3.5833333333333335,2.9166666666666665,Static (Variant A - prediction only),2.3,2.5999999999999996,True
+P_20261030_065658,30-39,Female,Master's degree,Administrator,6-10 years,5,72.5,100.0,3.8,4.8,4.0,5.0,4.3,4.416666666666667,Progressive (Variant B - with explanations),4.5,4.3,True
+P_20261030_073948,40-49,Male,Master's degree,Assistant Lecturer,6-10 years,1,77.5,85.0,3.8,4.4,4.0,4.6,4.25,4.5,Progressive (Variant B - with explanations),4.3,4.1,True
+P_20261030_075325,30-39,Female,Master's degree,Assistant Lecturer,3-5 years,1,57.5,75.0,2.8,3.6,3.2,4.0,3.3333333333333335,4.25,Progressive (Variant B - with explanations),3.6,3.2,True
+P_20261030_081413,30-39,Male,Master's degree,Examinations Officer,3-5 years,5,62.5,77.5,3.2,3.8,3.4,4.0,3.4166666666666665,4.75,Static (Variant A - prediction only),3.7,3.5,True
+P_20261030_082724,40-49,Female,Doctoral degree (PhD/EdD),Lecturer,0-2 years,1,57.5,62.5,3.0,3.4,3.0,3.8,3.25,4.083333333333333,Progressive (Variant B - with explanations),3.4,3.2,True
+P_20261107_231244,40-49,Male,Master's degree,lecturer,6-10 years,1,50.0,75.0,2.8,3.4,3.0,3.8,3.4166666666666665,3.9166666666666665,Progressive (Variant B - with explanations),3.4,3.0999999999999996,True
+P_20261107_232908,50-59,Male,Master's degree,Assessment Officer,6-10 years,1,62.5,80.0,3.4,4.0,3.4,4.4,3.5,4.3125,Progressive (Variant B - with explanations),3.9000000000000004,3.7,True
+P_20261111_180801,40-49,Male,Master's degree,Assistant Lecturer,11-15 years,5,57.5,70.0,3.2,4.0,2.2,4.0,3.5833333333333335,4.0,Progressive (Variant B - with explanations),3.1,3.6,True
+P_20261114_124407,18-29,Male,Master's degree,Lecturer,0-2 years,5,77.5,92.5,3.6,4.2,4.2,4.4,4.5,4.416666666666667,Progressive (Variant B - with explanations),4.300000000000001,3.9000000000000004,True
+P_20261114_130015,30-39,Male,Master's degree,Lecturer,3-5 years,5,80.0,90.0,4.6,4.8,4.2,5.0,4.916666666666667,5.0,Progressive (Variant B - with explanations),4.6,4.699999999999999,True
+P_20261114_170127,30-39,Male,Doctoral degree (PhD/EdD),Lecturer,0-2 years,5,67.5,70.0,3.6,4.0,3.4,3.6,4.166666666666667,4.25,Progressive (Variant B - with explanations),3.5,3.8,True

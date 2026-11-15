@@ -1,0 +1,27 @@
+DATA CLEANING LOG
+================================================================================
+
+Date: 2026-11-14
+Dataset frozen at commit: c49f33e
+
+EXCLUSIONS:
+1. Removed 6 abandoned participants (started but didn't complete)
+   - P_20261107_230052
+   - P_20261107_232520
+   - P_20261111_064211
+   - P_20261111_171940
+   - P_20261111_172427
+   - P_20261111_201640
+
+2. Participants with incomplete paired data:
+   - None
+
+FINAL SAMPLE:
+   Total completed: 31 participants
+   Complete paired data: 31 participants
+
+ANALYSIS DECISIONS:
+   - Multiplicity correction: Raw p-values primary, Holm as sensitivity
+   - Normality test: Shapiro-Wilk on paired differences
+   - If normal: Paired t-test; If non-normal: Wilcoxon signed-rank
+   - Alpha = 0.05, two-tailed
