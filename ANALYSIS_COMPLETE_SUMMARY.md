@@ -74,7 +74,7 @@ A hypothesis is supported only if Holm-adjusted p < .05 AND mean difference is i
 ---
 
 #### H1: Understanding ↔ Trust (Positive Association)
-**Test:** Spearman ρ on participant-average scores (Understanding non-normal: W=0.952, p=.017)
+**Test:** Spearman ρ on participant-average scores (Understanding averages non-normal: W=0.952, p=.017; Trust averages normal: W=0.971, p=.519)
 
 | Analysis | Statistic | p | 95% CI |
 |----------|-----------|---|--------|
@@ -195,6 +195,10 @@ Understanding showed a small, non-significant difference between interfaces. The
 - **16.1% (5/31) preferred Static (Variant A)**
 - Both participants who preferred Static were in the BA group (saw Progressive first)
 
+**Preference by order group:**
+- AB group (Static first, n=16): 14 preferred Progressive, 2 preferred Static
+- BA group (Progressive first, n=15): 12 preferred Progressive, 3 preferred Static
+
 **Note for thesis:** Preference may still be influenced by recency (tendency to prefer the most recently seen interface). The 2 Static-preferring participants in AB group and 3 in BA group show the preference is not entirely order-driven, but interpret cautiously.
 
 ---
@@ -247,13 +251,19 @@ Use this language in Chapter 4 and 5:
 
 | File | Description |
 |------|-------------|
+| `results/figures/figure_4_1_paired_comparisons.png/.pdf` | Paired comparisons — **regenerated** ✅ |
+| `results/figures/figure_4_2_understanding_trust_correlation.png/.pdf` | Understanding–Trust scatter — **regenerated** ✅ |
 | `results/updated_analysis/table_4_3_hypothesis_results.csv` | Full Table 4.3 |
 | `results/updated_analysis/order_period_effect.csv` | Order effects check |
 | `results/mixed_anova/mixed_anova_summary.csv` | Mixed ANOVA summary |
 | `results/counterbalanced_analysis/*.png` | Interaction plots (4 DVs) |
 | `results/tables/table_4_1_sample_composition.csv` | Table 4.1 |
+| `results/tables/table_4_2_descriptives.csv` | Table 4.2 descriptives |
 | `results/tables/reliability_cronbach_alpha.csv` | Reliability table |
-| `results/qualitative/` | Qualitative exports |
+| `results/tables/preference_analysis.csv` | Preference counts |
+| `results/appendix/appendix_a_normality_distributions.png/.pdf` | Appendix A |
+| `results/appendix/appendix_b_qq_plots.png/.pdf` | Appendix B |
+| `results/qualitative/` | Qualitative exports for thematic coding |
 
 ## 🔁 REPRODUCIBLE SCRIPTS
 
