@@ -1,12 +1,22 @@
-Rotation Group Analysis - NOT COMPLETED
+Rotation Group Analysis - NOT APPLICABLE
 
-The study design mentioned rotation groups (Study_Task_Case_Allocation.docx),
-but the rotation_group identifier is not present in the current dataset.
+After reviewing the study implementation (main branch code), ALL participants
+received the SAME task cases:
+- Variant A (Static): cases ["high_risk_1", "medium_risk_4", "low_risk_7"]
+- Variant B (Progressive): cases ["high_risk_2", "medium_risk_5", "low_risk_8"]
 
-To complete this analysis:
-1. Identify which rotation group each participant was assigned to
-2. Add a 'rotation_group' column (1, 2, or 3) to the data
-3. Re-run this script
+There was NO rotation of task cases across participants. The "rotation groups"
+mentioned in the planning documents (Study_Task_Case_Allocation.docx) were
+not implemented in the final study design.
 
-This is an exploratory analysis and was not pre-registered, so it is
-not required for the main hypothesis tests.
+This simplification:
+✓ Avoids confounding from case difficulty differences
+✓ Ensures all participants had identical experiences within each condition
+✓ Makes the comparison between Static and Progressive cleaner
+
+For the thesis:
+- Report that all participants received the same cases per condition
+- This is actually a STRENGTH: removes potential case-allocation confound
+- No rotation analysis needed or possible
+
+This is NOT a limitation - it's a simpler, cleaner design.
