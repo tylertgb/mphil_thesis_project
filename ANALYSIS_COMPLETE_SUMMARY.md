@@ -1,24 +1,30 @@
-# MPhil Thesis Analysis — Complete Summary (Updated)
+# MPhil Thesis Analysis — Complete Summary (Corrected)
 
 **Date:** November 15, 2026
 **Final Sample:** n = 31 (complete paired data)
 **Study Design:** Counterbalanced within-subjects design
 - Group AB (n=16): Static first → Progressive second
 - Group BA (n=15): Progressive first → Static second
+- **Confirmed by timestamps:** All 31 participants match their assigned order (31/31 ✅)
 **Analysis spec:** `analysis_spec_for_kiro.md` (all tests specified in advance)
 
 ---
 
-## ⚠️ KEY CHANGES FROM PREVIOUS VERSION
+## ⚠️ CORRECTIONS FROM PREVIOUS VERSION
 
-| Item | Previous (Fixed-order) | Updated (Counterbalanced) |
-|------|----------------------|--------------------------|
-| H1 (Understanding↔Trust) | r=.799, p<.001 ✅ | ρ=.037, p=.844 ❌ NOT SUPPORTED |
-| H2 (SUS) | t, p=.192 ❌ | F(1,29)=11.729, p=.002 ✅ SUPPORTED |
-| H3 (Confidence) | Wilcoxon **Z**=100.5 | Paired t(30)=2.692, p=.013 ✅ |
-| H4 (Trust) | Wilcoxon **Z**=55.0 | Paired t(30)=2.611, p=.015 ✅ |
-| Order effects | Untestable (fixed order) | Properly tested — none significant |
-| "Pre-registered" | Used incorrectly | Replaced with "specified in advance" |
+| Item | Previous Claim | Corrected Finding | Evidence |
+|------|---------------|-------------------|----------|
+| H2 p-value | p=.002 (ANOVA p used) | **p=.0015** (paired t-test, primary test) | `run_full_analysis_updated.py` |
+| H3 p-value | p=.013 (ANOVA p used) | **p=.0115** | Same |
+| H4 p-value | p=.015 (ANOVA p used) | **p=.0140** | Same |
+| Holm H2 | p=.006 | **p=.0046** | Same |
+| Holm H3 | p=.026 | **p=.023** | Same |
+| Holm H4 | p=.026 | **p=.023** | Same |
+| Preference | 83.9% (26/31) Progressive | **93.5% (29/31) Progressive** | Current `qualitative_feedback.csv` |
+| Preference by group | "Both Static-preferring in BA" | **AB: 15 Progressive, 1 Static; BA: 14 Progressive, 1 Static** | Same |
+| Order effects language | "Confirms no order effects" | **"No evidence of order effects"** (groups of 16 and 15 are small) | Statistical caution |
+| H1 explanation | "r=.799 was order artefact" | **Origin of old r=.799 unknown — cannot be reproduced from current data** | `investigate_h1_flip.py` |
+| Counterbalancing | Previously questioned | **Confirmed real: 31/31 timestamps match assignments** | `verify_all_assignments.py` |
 
 ---
 
@@ -27,13 +33,22 @@
 ### 1. Sample Composition (Table 4.1)
 **File:** `results/tables/table_4_1_sample_composition.csv`
 
-**Key Demographics:**
-- **Age:** 30–39 (41.9%), 40–49 (25.8%)
-- **Gender:** 80.6% male, 19.4% female
-- **Education:** 83.9% Master's, 16.1% Doctoral
-- **Experience:** 0–10 years (87%)
-- **Analytics Familiarity:** 51.6% Yes (familiarity_with_analytics=5), 48.4% No (=1)
-- **Counterbalancing:** AB=16, BA=15 (χ²=0.032, p=.858 — well balanced)
+| Characteristic | n | % |
+|---|---|---|
+| Age 18–29 | 7 | 22.6% |
+| Age 30–39 | 13 | 41.9% |
+| Age 40–49 | 8 | 25.8% |
+| Age 50–59 | 3 | 9.7% |
+| Male | 25 | 80.6% |
+| Female | 6 | 19.4% |
+| Master's degree | 26 | 83.9% |
+| Doctoral degree | 5 | 16.1% |
+| Analytics familiarity (Yes) | 16 | 51.6% |
+| Analytics familiarity (No) | 15 | 48.4% |
+| Experience 0–10 years | 27 | 87.1% |
+| **Counterbalancing: AB** | **16** | **51.6%** |
+| **Counterbalancing: BA** | **15** | **48.4%** |
+| **Balance (χ²=0.032, p=.858)** | — | **Well balanced** |
 
 ---
 
@@ -47,7 +62,6 @@
 | Understanding | .938 | .943 | Excellent |
 | Decision Confidence | .881 | .901 | Good → Excellent |
 
-All scales demonstrate acceptable to excellent internal consistency.
 Note: Trust, Understanding, and Confidence are not validated instruments; α estimates are approximate at n=31.
 
 ---
@@ -70,95 +84,95 @@ Note: Trust, Understanding, and Confidence are not validated instruments; α est
 
 **Multiplicity rule (specified in advance):** Holm correction applied to H2–H4.
 A hypothesis is supported only if Holm-adjusted p < .05 AND mean difference is in the predicted direction.
+**Primary test for H2–H4:** Paired t-test (all difference distributions normal by Shapiro-Wilk).
 
 ---
 
 #### H1: Understanding ↔ Trust (Positive Association)
-**Test:** Spearman ρ on participant-average scores (Understanding averages non-normal: W=0.952, p=.017; Trust averages normal: W=0.971, p=.519)
+**Test:** Spearman ρ on participant-average scores
+(Understanding averages non-normal: W=0.952, p=.017; Trust averages normal: W=0.971, p=.519 → Spearman used)
 
 | Analysis | Statistic | p | 95% CI |
 |----------|-----------|---|--------|
 | Primary (participant averages, n=31) | ρ = .037 | .844 | [−.339, .393] |
 | Sensitivity: rm_corr (n=62 obs) | r = .216 | .234 | [−.140, .530] |
-| Sensitivity: Static only | r = .118 | .529 | — |
-| Sensitivity: Progressive only | r = .097 | .606 | — |
+| Sensitivity: Static only (n=31) | r = .118 | .529 | — |
+| Sensitivity: Progressive only (n=31) | r = .097 | .606 | — |
 
 **Result: ❌ NOT SUPPORTED**
 
-No significant association between Understanding and Trust was found in the counterbalanced dataset. All analyses are consistent: the correlation is near zero across all analytic approaches. This contrasts with the previous fixed-order result (r=.799) which was likely inflated by shared order effects — both scores rose together as participants moved to their second interface.
-
-**Note for thesis:** Report this honestly. The previous r=.799 was an artefact of fixed ordering, not a genuine Understanding–Trust relationship. The counterbalanced design gives a more trustworthy estimate.
+No significant association between Understanding and Trust was found in the counterbalanced dataset. All four analyses converge near zero. The origin of the previously reported r=.799 cannot be reproduced from current data and should not be cited.
 
 ---
 
 #### H2: Progressive Interface Improves Usability (SUS)
-**Normality:** W=0.936, p=.063 → Normal → **Paired t-test**
+**Normality of differences:** W=0.936, p=.063 → Normal → **Paired t-test**
 
 | | Static | Progressive | Difference |
 |--|--------|-------------|-----------|
 | M (SD) | 62.58 (7.62) | 68.47 (5.83) | +5.89 (9.43) |
 
-- **Paired t-test:** t(30) = 3.483, p = .002
+- **Paired t-test:** t(30) = 3.483, p = .0015
 - **Mixed ANOVA (interface effect):** F(1,29) = 11.729, p = .002, η²p = .288
-- **Holm-adjusted p:** .006
+- **Holm-adjusted p:** .0046
 - **Effect size:** dz = 0.626 (medium-large)
 - **95% CI on difference:** [2.44, 9.34]
 - **Interface × Order interaction:** F(1,29) = 0.004, p = .950 ✅ No interaction
 
-**Result: ✅ SUPPORTED** (raw p=.002, Holm p=.006, correct direction)
+**Result: ✅ SUPPORTED** (raw p=.0015, Holm p=.0046, correct direction)
 
-Progressive interface was rated significantly more usable, with a medium-large effect. The effect was identical across both order groups (AB diff=+5.78, BA diff=+6.00), confirming the finding is not an order artefact.
+Progressive interface was rated significantly more usable with a medium-large effect. The 5.9-point advantage exceeds the commonly cited 3.5-point "noticeable difference" threshold, though the lower CI bound (2.44) is close to it — interpret conservatively. Effect was consistent across both order groups (AB diff=+5.78, BA diff=+6.00), and the Interface × Order interaction was non-significant, confirming the finding is not an order artefact.
 
 ---
 
 #### H3: Progressive Interface Increases Decision Confidence
-**Normality:** W=0.979, p=.785 → Normal → **Paired t-test**
+**Normality of differences:** W=0.979, p=.785 → Normal → **Paired t-test**
 
 | | Static | Progressive | Difference |
 |--|--------|-------------|-----------|
 | M (SD) | 4.01 (0.25) | 4.17 (0.20) | +0.16 (0.33) |
 
-- **Paired t-test:** t(30) = 2.692, p = .013
+- **Paired t-test:** t(30) = 2.692, p = .0115
 - **Mixed ANOVA (interface effect):** F(1,29) = 7.012, p = .013, η²p = .195
-- **Holm-adjusted p:** .026
+- **Holm-adjusted p:** .023
 - **Effect size:** dz = 0.484 (medium)
 - **95% CI on difference:** [0.04, 0.28]
 - **Interface × Order interaction:** F(1,29) = 0.017, p = .897 ✅ No interaction
 
-**Result: ✅ SUPPORTED** (raw p=.013, Holm p=.026, correct direction)
+**Result: ✅ SUPPORTED** (raw p=.0115, Holm p=.023, correct direction)
 
-Participants reported significantly higher decision confidence with the Progressive interface. Effect was consistent across both order groups (AB diff=+0.15, BA diff=+0.17).
+**Ceiling effect note:** Both condition means exceed 4.0 on a 1–5 scale (SD ≈ 0.2–0.25). The scale is near its upper limit, which compresses the observable difference. Mention this when interpreting H3 in the thesis.
 
 ---
 
 #### H4: Progressive Interface Increases Trust
-**Normality:** W=0.952, p=.172 → Normal → **Paired t-test**
+**Normality of differences:** W=0.952, p=.172 → Normal → **Paired t-test**
 
 | | Static | Progressive | Difference |
 |--|--------|-------------|-----------|
 | M (SD) | 3.81 (0.35) | 4.07 (0.35) | +0.25 (0.54) |
 
-- **Paired t-test:** t(30) = 2.611, p = .015
+- **Paired t-test:** t(30) = 2.611, p = .0140
 - **Mixed ANOVA (interface effect):** F(1,29) = 6.684, p = .015, η²p = .187
-- **Holm-adjusted p:** .026
+- **Holm-adjusted p:** .023
 - **Effect size:** dz = 0.469 (medium)
 - **95% CI on difference:** [0.06, 0.45]
 - **Interface × Order interaction:** F(1,29) = 0.418, p = .523 ✅ No interaction
 
-**Result: ✅ SUPPORTED** (raw p=.015, Holm p=.026, correct direction)
+**Result: ✅ SUPPORTED** (raw p=.0140, Holm p=.023, correct direction)
 
-Participants reported significantly higher trust in the Progressive interface. Effect was consistent across order groups (AB diff=+0.31, BA diff=+0.19).
+Effect consistent across order groups (AB diff=+0.31, BA diff=+0.19). Non-significant interaction confirms the finding is not driven by order.
 
 ---
 
 ### 5. Overall Hypothesis Summary
 
-| H | Hypothesis | Test | Statistic | p (raw) | p (Holm) | η²p / d | Supported |
-|---|-----------|------|-----------|---------|----------|---------|-----------|
+| H | Hypothesis | Test | Statistic | p (raw) | p (Holm) | Effect | Supported |
+|---|-----------|------|-----------|---------|----------|--------|-----------|
 | H1 | Understanding ↔ Trust | Spearman ρ | ρ=.037 | .844 | N/A | ρ=.037 | ❌ No |
-| H2 | Progressive > Static: SUS | Paired t + Mixed ANOVA | t(30)=3.483; F(1,29)=11.729 | .002 | .006 | η²p=.288; dz=.626 | ✅ Yes |
-| H3 | Progressive > Static: Confidence | Paired t + Mixed ANOVA | t(30)=2.692; F(1,29)=7.012 | .013 | .026 | η²p=.195; dz=.484 | ✅ Yes |
-| H4 | Progressive > Static: Trust | Paired t + Mixed ANOVA | t(30)=2.611; F(1,29)=6.684 | .015 | .026 | η²p=.187; dz=.469 | ✅ Yes |
+| H2 | Progressive > Static: SUS | Paired t-test | t(30)=3.483 | .0015 | .0046 | dz=.626 | ✅ Yes |
+| H3 | Progressive > Static: Confidence | Paired t-test | t(30)=2.692 | .0115 | .023 | dz=.484 | ✅ Yes |
+| H4 | Progressive > Static: Trust | Paired t-test | t(30)=2.611 | .0140 | .023 | dz=.469 | ✅ Yes |
 
 **Overall: 3/4 hypotheses supported**
 
@@ -166,15 +180,18 @@ Participants reported significantly higher trust in the Progressive interface. E
 
 ### 6. Counterbalancing & Order Effects
 **File:** `results/updated_analysis/order_period_effect.csv`
+**Timestamp verification:** `verify_all_assignments.py` — 31/31 ✅
 
-| Measure | AB diff M (SD) | BA diff M (SD) | t | p | Order Effect? |
-|---------|--------------|--------------|---|---|---------------|
-| SUS | +5.78 (9.65) | +6.00 (9.49) | −0.064 | .950 | ✅ None |
-| Confidence | +0.15 (0.28) | +0.17 (0.39) | −0.130 | .897 | ✅ None |
-| Trust | +0.31 (0.53) | +0.19 (0.56) | 0.646 | .523 | ✅ None |
-| Understanding | +0.33 (0.42) | −0.03 (1.11) | 1.179 | .248 | ✅ None |
+| Measure | AB diff M (SD) | BA diff M (SD) | t | p | Conclusion |
+|---------|--------------|--------------|---|---|------------|
+| SUS | +5.78 (9.65) | +6.00 (9.49) | −0.064 | .950 | No evidence of order effect |
+| Confidence | +0.15 (0.28) | +0.17 (0.39) | −0.130 | .897 | No evidence of order effect |
+| Trust | +0.31 (0.53) | +0.19 (0.56) | 0.646 | .523 | No evidence of order effect |
+| Understanding | +0.33 (0.42) | −0.03 (1.11) | 1.179 | .248 | No evidence of order effect |
 
-No significant order effects were found for any measure. The Progressive interface advantage on SUS, Trust, and Confidence was consistent regardless of which interface participants saw first. This confirms the findings reflect genuine design differences rather than order or practice effects.
+No significant order effects found for any measure. Note: with groups of n=16 and n=15, these tests have limited power to detect small order effects. Describe as "no evidence of order effects" rather than "order effects ruled out."
+
+The progressive interface advantage on SUS, Trust, and Confidence was consistent regardless of which interface participants saw first. All Interface × Order interactions were non-significant.
 
 ---
 
@@ -182,24 +199,25 @@ No significant order effects were found for any measure. The Progressive interfa
 **Mixed ANOVA:** F(1,29)=1.079, p=.308, η²p=.036, dz=.185
 **Normality of differences:** W=0.759, p<.001 — non-normal
 
-Understanding showed a small, non-significant difference between interfaces. The near-zero correlations with Trust (H1) across all sensitivity analyses suggest Understanding and Trust operate independently in this sample.
-
-**Note for thesis:** Understanding was not a primary hypothesis outcome (it feeds H1), so report it descriptively as an exploratory finding.
+Understanding showed a small, non-significant difference between interfaces. The near-zero correlations with Trust (H1) across all sensitivity analyses suggest Understanding and Trust operate independently in this sample. Report descriptively as an exploratory finding.
 
 ---
 
 ### 8. Preference Analysis
 **File:** `results/tables/preference_analysis.csv`
 
-- **83.9% (26/31) preferred Progressive (Variant B)**
-- **16.1% (5/31) preferred Static (Variant A)**
-- Both participants who preferred Static were in the BA group (saw Progressive first)
+- **93.5% (29/31) preferred Progressive (Variant B)**
+- **6.5% (2/31) preferred Static (Variant A)**
 
-**Preference by order group:**
-- AB group (Static first, n=16): 14 preferred Progressive, 2 preferred Static
-- BA group (Progressive first, n=15): 12 preferred Progressive, 3 preferred Static
+| Order group | n | Progressive | Static |
+|---|---|---|---|
+| AB (Static first) | 16 | 15 (93.8%) | 1 (6.3%) |
+| BA (Progressive first) | 15 | 14 (93.3%) | 1 (6.7%) |
 
-**Note for thesis:** Preference may still be influenced by recency (tendency to prefer the most recently seen interface). The 2 Static-preferring participants in AB group and 3 in BA group show the preference is not entirely order-driven, but interpret cautiously.
+The near-identical preference rates across both order groups (93.8% vs 93.3%) are noteworthy. BA participants saw Progressive **first** and 14/15 still preferred it — this rules out a simple recency explanation (preferring whichever was seen last). AB participants saw Progressive **second** and 15/16 preferred it. The convergence across both orders strengthens the preference finding.
+
+**Appropriate thesis language:**
+> "29 of 31 participants (93.5%) preferred the Progressive interface. Preference rates were near-identical across order groups (AB: 93.8%, BA: 93.3%), suggesting the preference was not driven by recency effects."
 
 ---
 
@@ -209,61 +227,62 @@ Understanding showed a small, non-significant difference between interfaces. The
 - 31 participants, 100% response rate on Q1 and Q4
 - Q2 (Challenges): 90.3% responded
 - Q3 (Improvements): 96.8% responded
-- Thematic coding to be completed manually by researcher (Braun & Clarke, 2006)
+- Thematic coding must be completed manually by the researcher (Braun & Clarke, 2006)
 
-**Common themes visible in raw data:**
+**Themes visible in raw data:**
 - Q1: SHAP explanation clarity, factor visibility, confidence scores
 - Q2: Technical terminology, colour scheme, slow navigation
 - Q3: Export functionality, trend lines, mobile version, glossary
-- Q4: 83.9% Progressive — reasons centre on transparency and explanation quality
+- Q4: 93.5% Progressive — reasons centre on transparency and explanation quality
 
 ---
 
-## 📊 INTERPRETATION FOR THESIS DISCUSSION
+## 📊 LANGUAGE FOR THESIS CHAPTERS
 
-### What the Counterbalanced Design Established:
-✅ **H2: Progressive interface significantly more usable** (SUS +5.9pts, dz=.626, p=.002)
-✅ **H3: Progressive interface significantly increases decision confidence** (dz=.484, p=.013)
-✅ **H4: Progressive interface significantly increases trust** (dz=.469, p=.015)
-✅ **No order effects** — all three effects are robust across presentation sequence
-✅ **No Interface × Order interactions** — effects consistent in both groups
+### Chapter 3 (Methods) — correct wording
+> "To control for order effects, participants were randomly assigned to one of two presentation orders based on enrolment timestamp: Group AB (n=16) completed the Static interface first, followed by the Progressive interface; Group BA (n=15) completed the Progressive interface first, followed by the Static interface. This counterbalanced within-subjects design allows the interface effect to be estimated independently of presentation order. Assignment was confirmed from response timestamps (31/31 participants matched their assigned order)."
 
-### What Was Not Supported:
-❌ **H1: Understanding and Trust are not significantly correlated** (ρ=.037, p=.844)
-   - The previous r=.799 was an artefact of fixed ordering (both scores improved together on the second interface)
-   - In the counterbalanced design, the relationship disappears — participants' understanding scores do not predict their trust scores
-   - This is an honest and important finding: improving perceived understanding does not automatically translate to trust
+### Chapter 4 (Results) — reporting templates
 
-❌ **Understanding did not significantly improve** between interfaces (p=.308)
+**H2:**
+> "A paired t-test indicated that Progressive interface usability (M=68.47, SD=5.83) was significantly higher than Static interface usability (M=62.58, SD=7.62), t(30)=3.483, p=.0015, dz=0.626, 95% CI [2.44, 9.34], Holm p=.005. A 2×2 mixed ANOVA confirmed the interface effect, F(1,29)=11.729, p=.002, η²p=.288, with no significant Interface × Order interaction, F(1,29)=0.004, p=.950, indicating the advantage was consistent across presentation orders."
 
-### Revised Causal Language:
-Use this language in Chapter 4 and 5:
-- ✅ "The Progressive interface produced significantly higher trust scores than the Static interface, F(1,29)=6.684, p=.015, η²p=.187, an effect that was consistent across both presentation orders."
-- ✅ "No significant association was found between perceived understanding and trust, ρ=.037, p=.844, 95% CI [−.339, .393]."
-- ✅ "The counterbalanced design confirmed that order effects do not account for the observed differences (all order effect tests p>.248)."
-- ❌ Do NOT write: "pre-registered hypotheses"
-- ❌ Do NOT write: "without compromising usability" (SUS improved significantly)
-- ❌ Do NOT write: "Wilcoxon Z = ..." (use W statistic or switch to paired t)
+**H3:**
+> "Decision confidence was significantly higher under the Progressive interface (M=4.17, SD=0.20) than the Static interface (M=4.01, SD=0.25), t(30)=2.692, p=.012, dz=0.484, 95% CI [0.04, 0.28], Holm p=.023. Note that both means fall near the ceiling of the scale (>4.0 on a 1–5 scale), which may limit the detectable range of differences."
+
+**H4:**
+> "Trust was significantly higher under the Progressive interface (M=4.07, SD=0.35) than the Static interface (M=3.81, SD=0.35), t(30)=2.611, p=.014, dz=0.469, 95% CI [0.06, 0.45], Holm p=.023. The Interface × Order interaction was non-significant, F(1,29)=0.418, p=.523, confirming the effect was consistent regardless of presentation order."
+
+**H1:**
+> "No significant association was found between perceived understanding and trust, Spearman ρ=.037, p=.844, 95% CI [−.339, .393] (n=31 participant averages). Sensitivity analyses using repeated-measures correlation (r=.216, p=.234) and per-condition Pearson correlations (Static: r=.118, p=.529; Progressive: r=.097, p=.606) were consistent with this null finding."
+
+### Chapter 5 (Discussion) — limitations to include
+1. **Small sample, single institution.** n=31 from UDS/BACE limits generalisation beyond similar populations.
+2. **Ceiling effects on Decision Confidence.** Both condition means exceed 4.0 (SD≈0.2). Limited scale range may underestimate the true effect.
+3. **H1 not supported.** The absence of an Understanding–Trust correlation is inconsistent with theoretical expectations. Future work with larger samples and validated instruments should revisit this.
+4. **Order effects test power.** With n=16 and n=15 per group, the order effects tests have limited power to detect small order effects. Absence of significance is not proof of absence.
 
 ---
 
 ## 📁 OUTPUT FILES
 
-| File | Description |
-|------|-------------|
-| `results/figures/figure_4_1_paired_comparisons.png/.pdf` | Paired comparisons — **regenerated** ✅ |
-| `results/figures/figure_4_2_understanding_trust_correlation.png/.pdf` | Understanding–Trust scatter — **regenerated** ✅ |
-| `results/updated_analysis/table_4_3_hypothesis_results.csv` | Full Table 4.3 |
-| `results/updated_analysis/order_period_effect.csv` | Order effects check |
-| `results/mixed_anova/mixed_anova_summary.csv` | Mixed ANOVA summary |
-| `results/counterbalanced_analysis/*.png` | Interaction plots (4 DVs) |
-| `results/tables/table_4_1_sample_composition.csv` | Table 4.1 |
-| `results/tables/table_4_2_descriptives.csv` | Table 4.2 descriptives |
-| `results/tables/reliability_cronbach_alpha.csv` | Reliability table |
-| `results/tables/preference_analysis.csv` | Preference counts |
-| `results/appendix/appendix_a_normality_distributions.png/.pdf` | Appendix A |
-| `results/appendix/appendix_b_qq_plots.png/.pdf` | Appendix B |
-| `results/qualitative/` | Qualitative exports for thematic coding |
+| File | Description | Status |
+|------|-------------|--------|
+| `results/figures/figure_4_1_paired_comparisons.png/.pdf` | Paired comparisons — updated ✅ | ✅ Use |
+| `results/figures/figure_4_2_understanding_trust_correlation.png/.pdf` | Understanding–Trust scatter — updated ✅ | ✅ Use |
+| `results/updated_analysis/table_4_3_hypothesis_results.csv` | Table 4.3 | ✅ Use (use paired t p-values) |
+| `results/updated_analysis/order_period_effect.csv` | Order effects check | ✅ Use |
+| `results/mixed_anova/mixed_anova_summary.csv` | Mixed ANOVA summary | ✅ Use (for interaction check) |
+| `results/counterbalanced_analysis/*.png` | Interaction plots (4 DVs) | ✅ Use |
+| `results/tables/table_4_1_sample_composition.csv` | Table 4.1 | ✅ Valid |
+| `results/tables/table_4_2_descriptives.csv` | Table 4.2 | ✅ Valid |
+| `results/tables/reliability_cronbach_alpha.csv` | Reliability | ✅ Valid |
+| `results/tables/preference_analysis.csv` | Preference counts (29/31) | ✅ Valid |
+| `results/appendix/appendix_a_normality_distributions.png/.pdf` | Appendix A | ✅ Valid |
+| `results/appendix/appendix_b_qq_plots.png/.pdf` | Appendix B | ✅ Valid |
+| `results/qualitative/` | Qualitative exports | ✅ Valid |
+
+---
 
 ## 🔁 REPRODUCIBLE SCRIPTS
 
@@ -272,6 +291,8 @@ Use this language in Chapter 4 and 5:
 | `run_full_analysis_updated.py` | H1–H4, order effects, Table 4.3 (seed 42) |
 | `run_mixed_anova.py` | Mixed ANOVA F-statistics, η²p |
 | `analyze_counterbalanced_data.py` | Descriptives + interaction plots |
+| `investigate_h1_flip.py` | H1 verification, true t p-values, preference counts |
+| `verify_all_assignments.py` | Confirms 31/31 timestamp-assignment match |
 | `calculate_reliability_cronbach_alpha.py` | Cronbach's α |
 | `generate_table_4_1_sample_composition.py` | Table 4.1 demographics |
 
@@ -279,24 +300,24 @@ Use this language in Chapter 4 and 5:
 
 ## 📝 REMAINING FOR RESEARCHER
 
-1. **Write Chapter 4 Results** using tables and figures above
-2. **Conduct thematic analysis** (Braun & Clarke) on qualitative data — Kiro has exported the data, coding is yours
-3. **Update Chapter 3 Methods** to describe counterbalanced design accurately
-4. **Update Chapter 5 Discussion** using revised causal language above
-5. **Reconcile Appendix A** — confirm Understanding scale is 5 items (as logged) and update any reference to 3 items
+1. **Write Chapter 4 Results** using tables and reporting templates above
+2. **Update Chapter 3** to describe counterbalanced design and confirm assignment from timestamps
+3. **Conduct thematic coding** (Braun & Clarke) on qualitative data — files in `results/qualitative/`
+4. **Write Chapter 5 Discussion** using four limitations listed above
+5. **Reconcile Appendix A** — confirm Understanding scale is 5 items as logged
 
 ---
 
 ## 🔒 DATA INTEGRITY
 
 - **Clean dataset:** n=31, no missing paired data
-- **Counterbalanced:** AB=16, BA=15, balance confirmed (χ²=0.032, p=.858)
+- **Counterbalancing confirmed:** 31/31 timestamps match AB/BA assignments (`verify_all_assignments.py`)
 - **Reproducible:** All analyses scripted with seed 42, version-controlled
-- **Transparent:** Raw and Holm-adjusted p-values reported side by side
-- **Honest:** Non-significant H1 and H2-Understanding reported plainly without reframing
-- **Corrected:** Wilcoxon Z → t-statistic (all differences normal); "pre-registered" → "specified in advance"
+- **Transparent:** Raw and Holm-adjusted p-values reported side by side; paired t-test used as primary (not ANOVA p)
+- **Honest:** Non-significant H1, ceiling effects on Confidence, and order effect test limitations reported plainly
+- **Corrected:** p-values now from paired t-test (primary); preference count corrected to 29/31 (93.5%)
 
 ---
 
 **Analysis complete and ready for thesis writing.** 🎓
-*Last updated: November 15, 2026*
+*Last updated: November 15, 2026 — post-investigation corrections applied*
